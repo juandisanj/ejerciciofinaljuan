@@ -50,6 +50,4 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		addFichaje(fichaje);
 	}
 	
-	
-	
 }

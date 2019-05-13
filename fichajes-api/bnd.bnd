@@ -1,6 +1,6 @@
 Bundle-Name: fichajes-api
 Bundle-SymbolicName: es.vass.fichaje.api
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.0
 Export-Package:\
 	es.vass.fichaje.exception,\
 	es.vass.fichaje.model,\

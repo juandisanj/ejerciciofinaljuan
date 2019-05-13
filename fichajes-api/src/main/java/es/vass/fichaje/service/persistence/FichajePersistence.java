@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.service.persistence.BasePersistence;
 import es.vass.fichaje.exception.NoSuchFichajeException;
 import es.vass.fichaje.model.Fichaje;
 
+import java.util.Date;
+
 /**
  * The persistence interface for the fichaje service.
  *
@@ -311,6 +313,137 @@ public interface FichajePersistence extends BasePersistence<Fichaje> {
 	* @return the number of matching fichajes
 	*/
 	public int countByUuid_C(String uuid, long companyId);
+
+	/**
+	* Returns all the fichajes where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @return the matching fichajes
+	*/
+	public java.util.List<Fichaje> findByFecha(Date horaEntrada);
+
+	/**
+	* Returns a range of all the fichajes where horaEntrada = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param horaEntrada the hora entrada
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @return the range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByFecha(Date horaEntrada, int start,
+		int end);
+
+	/**
+	* Returns an ordered range of all the fichajes where horaEntrada = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param horaEntrada the hora entrada
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByFecha(Date horaEntrada, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the fichajes where horaEntrada = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param horaEntrada the hora entrada
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByFecha(Date horaEntrada, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first fichaje in the ordered set where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public Fichaje findByFecha_First(Date horaEntrada,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Returns the first fichaje in the ordered set where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public Fichaje fetchByFecha_First(Date horaEntrada,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns the last fichaje in the ordered set where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public Fichaje findByFecha_Last(Date horaEntrada,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Returns the last fichaje in the ordered set where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public Fichaje fetchByFecha_Last(Date horaEntrada,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns the fichajes before and after the current fichaje in the ordered set where horaEntrada = &#63;.
+	*
+	* @param fichajeId the primary key of the current fichaje
+	* @param horaEntrada the hora entrada
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next fichaje
+	* @throws NoSuchFichajeException if a fichaje with the primary key could not be found
+	*/
+	public Fichaje[] findByFecha_PrevAndNext(long fichajeId, Date horaEntrada,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Removes all the fichajes where horaEntrada = &#63; from the database.
+	*
+	* @param horaEntrada the hora entrada
+	*/
+	public void removeByFecha(Date horaEntrada);
+
+	/**
+	* Returns the number of fichajes where horaEntrada = &#63;.
+	*
+	* @param horaEntrada the hora entrada
+	* @return the number of matching fichajes
+	*/
+	public int countByFecha(Date horaEntrada);
 
 	/**
 	* Caches the fichaje in the entity cache if it is enabled.

@@ -5,7 +5,7 @@
 	<import class="es.vass.fichaje.model.Fichaje" />
 	<import class="es.vass.fichaje.model.Servicio" />
 	<import class="es.vass.fichaje.model.TipoServicio" />
-	<class name="es.vass.fichaje.model.impl.FichajeImpl" table="FIchaje_Fichaje">
+	<class name="es.vass.fichaje.model.impl.FichajeImpl" table="Fichaje_Fichaje">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="fichajeId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -17,7 +17,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="horaSalida" type="org.hibernate.type.TimestampType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="horas" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
-	<class name="es.vass.fichaje.model.impl.ServicioImpl" table="FIchaje_Servicio">
+	<class name="es.vass.fichaje.model.impl.ServicioImpl" table="Fichaje_Servicio">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="idServicio" type="long">
 			<generator class="assigned" />
 		</id>
@@ -29,7 +29,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="idTipoServicio" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="fichajeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="es.vass.fichaje.model.impl.TipoServicioImpl" table="FIchaje_TipoServicio">
+	<class name="es.vass.fichaje.model.impl.TipoServicioImpl" table="Fichaje_TipoServicio">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="idTipoServicio" type="long">
 			<generator class="assigned" />
 		</id>

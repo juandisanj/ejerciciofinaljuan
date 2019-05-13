@@ -47,7 +47,10 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
+import java.sql.Timestamp;
+
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1211,6 +1214,544 @@ public class FichajePersistenceImpl extends BasePersistenceImpl<Fichaje>
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "fichaje.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(fichaje.uuid IS NULL OR fichaje.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "fichaje.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FECHA = new FinderPath(FichajeModelImpl.ENTITY_CACHE_ENABLED,
+			FichajeModelImpl.FINDER_CACHE_ENABLED, FichajeImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFecha",
+			new String[] {
+				Date.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA = new FinderPath(FichajeModelImpl.ENTITY_CACHE_ENABLED,
+			FichajeModelImpl.FINDER_CACHE_ENABLED, FichajeImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFecha",
+			new String[] { Date.class.getName() },
+			FichajeModelImpl.HORAENTRADA_COLUMN_BITMASK |
+			FichajeModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_FECHA = new FinderPath(FichajeModelImpl.ENTITY_CACHE_ENABLED,
+			FichajeModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByFecha",
+			new String[] { Date.class.getName() });
+
+	/**
+	 * Returns all the fichajes where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @return the matching fichajes
+	 */
+	@Override
+	public List<Fichaje> findByFecha(Date horaEntrada) {
+		return findByFecha(horaEntrada, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the fichajes where horaEntrada = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param start the lower bound of the range of fichajes
+	 * @param end the upper bound of the range of fichajes (not inclusive)
+	 * @return the range of matching fichajes
+	 */
+	@Override
+	public List<Fichaje> findByFecha(Date horaEntrada, int start, int end) {
+		return findByFecha(horaEntrada, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the fichajes where horaEntrada = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param start the lower bound of the range of fichajes
+	 * @param end the upper bound of the range of fichajes (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching fichajes
+	 */
+	@Override
+	public List<Fichaje> findByFecha(Date horaEntrada, int start, int end,
+		OrderByComparator<Fichaje> orderByComparator) {
+		return findByFecha(horaEntrada, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the fichajes where horaEntrada = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param start the lower bound of the range of fichajes
+	 * @param end the upper bound of the range of fichajes (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching fichajes
+	 */
+	@Override
+	public List<Fichaje> findByFecha(Date horaEntrada, int start, int end,
+		OrderByComparator<Fichaje> orderByComparator, boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA;
+			finderArgs = new Object[] { _getTime(horaEntrada) };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FECHA;
+			finderArgs = new Object[] {
+					_getTime(horaEntrada),
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Fichaje> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Fichaje>)finderCache.getResult(finderPath, finderArgs,
+					this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Fichaje fichaje : list) {
+					if (!Objects.equals(horaEntrada, fichaje.getHoraEntrada())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_FICHAJE_WHERE);
+
+			boolean bindHoraEntrada = false;
+
+			if (horaEntrada == null) {
+				query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_1);
+			}
+			else {
+				bindHoraEntrada = true;
+
+				query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(FichajeModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindHoraEntrada) {
+					qPos.add(new Timestamp(horaEntrada.getTime()));
+				}
+
+				if (!pagination) {
+					list = (List<Fichaje>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Fichaje>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first fichaje in the ordered set where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching fichaje
+	 * @throws NoSuchFichajeException if a matching fichaje could not be found
+	 */
+	@Override
+	public Fichaje findByFecha_First(Date horaEntrada,
+		OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException {
+		Fichaje fichaje = fetchByFecha_First(horaEntrada, orderByComparator);
+
+		if (fichaje != null) {
+			return fichaje;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("horaEntrada=");
+		msg.append(horaEntrada);
+
+		msg.append("}");
+
+		throw new NoSuchFichajeException(msg.toString());
+	}
+
+	/**
+	 * Returns the first fichaje in the ordered set where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	 */
+	@Override
+	public Fichaje fetchByFecha_First(Date horaEntrada,
+		OrderByComparator<Fichaje> orderByComparator) {
+		List<Fichaje> list = findByFecha(horaEntrada, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last fichaje in the ordered set where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching fichaje
+	 * @throws NoSuchFichajeException if a matching fichaje could not be found
+	 */
+	@Override
+	public Fichaje findByFecha_Last(Date horaEntrada,
+		OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException {
+		Fichaje fichaje = fetchByFecha_Last(horaEntrada, orderByComparator);
+
+		if (fichaje != null) {
+			return fichaje;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("horaEntrada=");
+		msg.append(horaEntrada);
+
+		msg.append("}");
+
+		throw new NoSuchFichajeException(msg.toString());
+	}
+
+	/**
+	 * Returns the last fichaje in the ordered set where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	 */
+	@Override
+	public Fichaje fetchByFecha_Last(Date horaEntrada,
+		OrderByComparator<Fichaje> orderByComparator) {
+		int count = countByFecha(horaEntrada);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Fichaje> list = findByFecha(horaEntrada, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the fichajes before and after the current fichaje in the ordered set where horaEntrada = &#63;.
+	 *
+	 * @param fichajeId the primary key of the current fichaje
+	 * @param horaEntrada the hora entrada
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next fichaje
+	 * @throws NoSuchFichajeException if a fichaje with the primary key could not be found
+	 */
+	@Override
+	public Fichaje[] findByFecha_PrevAndNext(long fichajeId, Date horaEntrada,
+		OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException {
+		Fichaje fichaje = findByPrimaryKey(fichajeId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Fichaje[] array = new FichajeImpl[3];
+
+			array[0] = getByFecha_PrevAndNext(session, fichaje, horaEntrada,
+					orderByComparator, true);
+
+			array[1] = fichaje;
+
+			array[2] = getByFecha_PrevAndNext(session, fichaje, horaEntrada,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Fichaje getByFecha_PrevAndNext(Session session, Fichaje fichaje,
+		Date horaEntrada, OrderByComparator<Fichaje> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_FICHAJE_WHERE);
+
+		boolean bindHoraEntrada = false;
+
+		if (horaEntrada == null) {
+			query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_1);
+		}
+		else {
+			bindHoraEntrada = true;
+
+			query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(FichajeModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindHoraEntrada) {
+			qPos.add(new Timestamp(horaEntrada.getTime()));
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(fichaje);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Fichaje> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the fichajes where horaEntrada = &#63; from the database.
+	 *
+	 * @param horaEntrada the hora entrada
+	 */
+	@Override
+	public void removeByFecha(Date horaEntrada) {
+		for (Fichaje fichaje : findByFecha(horaEntrada, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(fichaje);
+		}
+	}
+
+	/**
+	 * Returns the number of fichajes where horaEntrada = &#63;.
+	 *
+	 * @param horaEntrada the hora entrada
+	 * @return the number of matching fichajes
+	 */
+	@Override
+	public int countByFecha(Date horaEntrada) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_FECHA;
+
+		Object[] finderArgs = new Object[] { _getTime(horaEntrada) };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_FICHAJE_WHERE);
+
+			boolean bindHoraEntrada = false;
+
+			if (horaEntrada == null) {
+				query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_1);
+			}
+			else {
+				bindHoraEntrada = true;
+
+				query.append(_FINDER_COLUMN_FECHA_HORAENTRADA_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindHoraEntrada) {
+					qPos.add(new Timestamp(horaEntrada.getTime()));
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_FECHA_HORAENTRADA_1 = "fichaje.horaEntrada IS NULL";
+	private static final String _FINDER_COLUMN_FECHA_HORAENTRADA_2 = "fichaje.horaEntrada = ?";
 
 	public FichajePersistenceImpl() {
 		setModelClass(Fichaje.class);
@@ -1481,6 +2022,12 @@ public class FichajePersistenceImpl extends BasePersistenceImpl<Fichaje>
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
+			args = new Object[] { fichajeModelImpl.getHoraEntrada() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_FECHA, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -1520,6 +2067,23 @@ public class FichajePersistenceImpl extends BasePersistenceImpl<Fichaje>
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
+					args);
+			}
+
+			if ((fichajeModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						fichajeModelImpl.getOriginalHoraEntrada()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_FECHA, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA,
+					args);
+
+				args = new Object[] { fichajeModelImpl.getHoraEntrada() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_FECHA, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FECHA,
 					args);
 			}
 		}
@@ -1940,6 +2504,15 @@ public class FichajePersistenceImpl extends BasePersistenceImpl<Fichaje>
 	protected EntityCache entityCache;
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
+
+	private Long _getTime(Date date) {
+		if (date == null) {
+			return null;
+		}
+
+		return date.getTime();
+	}
+
 	private static final String _SQL_SELECT_FICHAJE = "SELECT fichaje FROM Fichaje fichaje";
 	private static final String _SQL_SELECT_FICHAJE_WHERE_PKS_IN = "SELECT fichaje FROM Fichaje fichaje WHERE fichajeId IN (";
 	private static final String _SQL_SELECT_FICHAJE_WHERE = "SELECT fichaje FROM Fichaje fichaje WHERE ";
