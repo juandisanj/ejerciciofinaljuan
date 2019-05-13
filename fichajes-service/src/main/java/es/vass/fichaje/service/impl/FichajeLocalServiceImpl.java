@@ -14,10 +14,13 @@
 
 package es.vass.fichaje.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 import java.util.Date;
 
 import es.vass.fichaje.model.Fichaje;
 import es.vass.fichaje.model.impl.FichajeImpl;
+import es.vass.fichaje.service.FichajeLocalServiceUtil;
 import es.vass.fichaje.service.base.FichajeLocalServiceBaseImpl;
 
 /**
@@ -49,5 +52,14 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		
 		addFichaje(fichaje);
 	}
+	
+	public Fichaje findById(long idFichaje) throws PortalException {
+		Fichaje fichaje = FichajeLocalServiceUtil.getFichaje(idFichaje);
+		return fichaje;
+	}
+	
+//	public List<Fichaje> findByDate(Date date){
+//		List<Fichaje> listFichaje = FichajeLocalServiceUtil.g
+//	}
 	
 }

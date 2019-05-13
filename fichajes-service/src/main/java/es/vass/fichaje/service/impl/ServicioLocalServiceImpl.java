@@ -15,9 +15,11 @@
 package es.vass.fichaje.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import es.vass.fichaje.model.Servicio;
 import es.vass.fichaje.model.impl.ServicioImpl;
+import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.base.ServicioLocalServiceBaseImpl;
 
 /**
@@ -50,4 +52,8 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 		
 		addServicio(servicio);
 	}
+	
+//	public List<Servicio> findByIdFichaje(long idFichaje){
+//		List<Servicio> listaFichajes = ServicioLocalServiceUtil.f
+//	}
 }
