@@ -1,0 +1,4 @@
+Bundle-Name: fichajes-web
+Bundle-SymbolicName: es.vass.fichajes
+Bundle-Version: 1.0.0
+Export-Package: es.vass.fichajes.constants

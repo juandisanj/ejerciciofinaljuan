@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_1_0.dtd">
+
+<service-builder package-path="es.vass.fichaje">
+	<namespace>FIchaje</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="Fichaje" remote-service="false" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="fichajeId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+
+		<!-- Other fields -->
+
+		<column name="horaEntrada" type="Date" />
+		<column name="horaSalida" type="Date" />
+		<column name="horas" type="double" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="userId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+    <entity name="Servicio" remote-service="false" local-service="true">
+        <column name="idServicio" type="long" primary="true"></column>
+        <column name="activo" type="boolean"></column>
+        <column name="horaInicio" type="Date"></column>
+        <column name="horaFin" type="Date"></column>
+        <column name="longitud" type="double"></column>
+        <column name="latitud" type="double"></column>
+        <column name="idTipoServicio" type="long"></column>
+        <column name="fichajeId" type="long"></column>
+    </entity>
+    
+    <entity name="TipoServicio" local-service="true" remote-service="false">
+        <column name="idTipoServicio" type="long" primary="true"></column>
+        <column name="nombre" type="String"></column>
+        <column name="computa" type="boolean"></column>
+    </entity>
+</service-builder>

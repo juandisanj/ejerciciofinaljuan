@@ -1,0 +1,10 @@
+Bundle-Name: fichajes-api
+Bundle-SymbolicName: es.vass.fichaje.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	es.vass.fichaje.exception,\
+	es.vass.fichaje.model,\
+	es.vass.fichaje.service,\
+	es.vass.fichaje.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../fichajes-service/service.xml

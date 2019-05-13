@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="es.vass.fichaje.model.Fichaje">
+		<field name="uuid" type="String" />
+		<field name="fichajeId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="horaEntrada" type="Date" />
+		<field name="horaSalida" type="Date" />
+		<field name="horas" type="double" />
+	</model>
+	<model name="es.vass.fichaje.model.Servicio">
+		<field name="idServicio" type="long" />
+		<field name="activo" type="boolean" />
+		<field name="horaInicio" type="Date" />
+		<field name="horaFin" type="Date" />
+		<field name="longitud" type="double" />
+		<field name="latitud" type="double" />
+		<field name="idTipoServicio" type="long" />
+		<field name="fichajeId" type="long" />
+	</model>
+	<model name="es.vass.fichaje.model.TipoServicio">
+		<field name="idTipoServicio" type="long" />
+		<field name="nombre" type="String" />
+		<field name="computa" type="boolean" />
+	</model>
+</model-hints>

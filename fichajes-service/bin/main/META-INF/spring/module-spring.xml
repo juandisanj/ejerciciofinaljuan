@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="es.vass.fichaje.service.impl.FichajeLocalServiceImpl" id="es.vass.fichaje.service.FichajeLocalService" />
+	<bean class="es.vass.fichaje.service.persistence.impl.FichajePersistenceImpl" id="es.vass.fichaje.service.persistence.FichajePersistence" parent="basePersistence" />
+	<bean class="es.vass.fichaje.service.impl.ServicioLocalServiceImpl" id="es.vass.fichaje.service.ServicioLocalService" />
+	<bean class="es.vass.fichaje.service.persistence.impl.ServicioPersistenceImpl" id="es.vass.fichaje.service.persistence.ServicioPersistence" parent="basePersistence" />
+	<bean class="es.vass.fichaje.service.impl.TipoServicioLocalServiceImpl" id="es.vass.fichaje.service.TipoServicioLocalService" />
+	<bean class="es.vass.fichaje.service.persistence.impl.TipoServicioPersistenceImpl" id="es.vass.fichaje.service.persistence.TipoServicioPersistence" parent="basePersistence" />
+</beans>

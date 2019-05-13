@@ -1,0 +1,12 @@
+dependencies {
+	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib"
+	compileOnly group: "com.liferay", name: "com.liferay.portal.spring.extender.api"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+	compileOnly project(":modules:fichajes:fichajes-api")
+}
+
+buildService {
+	apiDir = "../fichajes-api/src/main/java"
+}
+
+group = "es.vass.fichaje"
