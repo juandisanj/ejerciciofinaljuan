@@ -193,6 +193,20 @@ public interface FichajeModel extends BaseModel<Fichaje>, ShardedModel {
 	 */
 	public void setHoras(double horas);
 
+	/**
+	 * Returns the horas extra of this fichaje.
+	 *
+	 * @return the horas extra of this fichaje
+	 */
+	public double getHorasExtra();
+
+	/**
+	 * Sets the horas extra of this fichaje.
+	 *
+	 * @param horasExtra the horas extra of this fichaje
+	 */
+	public void setHorasExtra(double horasExtra);
+
 	@Override
 	public boolean isNew();
 

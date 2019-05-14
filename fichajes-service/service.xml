@@ -23,6 +23,7 @@
 		<column name="horaEntrada" type="Date" />
 		<column name="horaSalida" type="Date" />
 		<column name="horas" type="double" />
+		<column name="horasExtra" type="double" />
 
 		<!-- Order -->
 
@@ -50,6 +51,7 @@
         <column name="activo" type="boolean"></column>
         <column name="horaInicio" type="Date"></column>
         <column name="horaFin" type="Date"></column>
+        <column name="duracion" type="double"></column>
         <column name="longitud" type="double"></column>
         <column name="latitud" type="double"></column>
         <column name="idTipoServicio" type="long"></column>

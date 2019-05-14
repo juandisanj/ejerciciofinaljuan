@@ -302,9 +302,9 @@ public class FichajeLocalServiceUtil {
 	}
 
 	public static boolean updateEndFichaje(long fichajeId,
-		java.util.Date horaSalida)
+		java.util.Date horaSalida, double horas)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().updateEndFichaje(fichajeId, horaSalida);
+		return getService().updateEndFichaje(fichajeId, horaSalida, horas);
 	}
 
 	/**

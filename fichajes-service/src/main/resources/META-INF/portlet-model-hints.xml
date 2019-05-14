@@ -10,12 +10,14 @@
 		<field name="horaEntrada" type="Date" />
 		<field name="horaSalida" type="Date" />
 		<field name="horas" type="double" />
+		<field name="horasExtra" type="double" />
 	</model>
 	<model name="es.vass.fichaje.model.Servicio">
 		<field name="idServicio" type="long" />
 		<field name="activo" type="boolean" />
 		<field name="horaInicio" type="Date" />
 		<field name="horaFin" type="Date" />
+		<field name="duracion" type="double" />
 		<field name="longitud" type="double" />
 		<field name="latitud" type="double" />
 		<field name="idTipoServicio" type="long" />

@@ -66,6 +66,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 			{ "activo", Types.BOOLEAN },
 			{ "horaInicio", Types.TIMESTAMP },
 			{ "horaFin", Types.TIMESTAMP },
+			{ "duracion", Types.DOUBLE },
 			{ "longitud", Types.DOUBLE },
 			{ "latitud", Types.DOUBLE },
 			{ "idTipoServicio", Types.BIGINT },
@@ -78,13 +79,14 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 		TABLE_COLUMNS_MAP.put("activo", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("horaInicio", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("horaFin", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("duracion", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("longitud", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("latitud", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("idTipoServicio", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("fichajeId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Fichaje_Servicio (idServicio LONG not null primary key,activo BOOLEAN,horaInicio DATE null,horaFin DATE null,longitud DOUBLE,latitud DOUBLE,idTipoServicio LONG,fichajeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Fichaje_Servicio (idServicio LONG not null primary key,activo BOOLEAN,horaInicio DATE null,horaFin DATE null,duracion DOUBLE,longitud DOUBLE,latitud DOUBLE,idTipoServicio LONG,fichajeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Fichaje_Servicio";
 	public static final String ORDER_BY_JPQL = " ORDER BY servicio.idServicio ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Fichaje_Servicio.idServicio ASC";
@@ -146,6 +148,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 		attributes.put("activo", isActivo());
 		attributes.put("horaInicio", getHoraInicio());
 		attributes.put("horaFin", getHoraFin());
+		attributes.put("duracion", getDuracion());
 		attributes.put("longitud", getLongitud());
 		attributes.put("latitud", getLatitud());
 		attributes.put("idTipoServicio", getIdTipoServicio());
@@ -181,6 +184,12 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 
 		if (horaFin != null) {
 			setHoraFin(horaFin);
+		}
+
+		Double duracion = (Double)attributes.get("duracion");
+
+		if (duracion != null) {
+			setDuracion(duracion);
 		}
 
 		Double longitud = (Double)attributes.get("longitud");
@@ -251,6 +260,16 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 	@Override
 	public void setHoraFin(Date horaFin) {
 		_horaFin = horaFin;
+	}
+
+	@Override
+	public double getDuracion() {
+		return _duracion;
+	}
+
+	@Override
+	public void setDuracion(double duracion) {
+		_duracion = duracion;
 	}
 
 	@Override
@@ -340,6 +359,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 		servicioImpl.setActivo(isActivo());
 		servicioImpl.setHoraInicio(getHoraInicio());
 		servicioImpl.setHoraFin(getHoraFin());
+		servicioImpl.setDuracion(getDuracion());
 		servicioImpl.setLongitud(getLongitud());
 		servicioImpl.setLatitud(getLatitud());
 		servicioImpl.setIdTipoServicio(getIdTipoServicio());
@@ -439,6 +459,8 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 			servicioCacheModel.horaFin = Long.MIN_VALUE;
 		}
 
+		servicioCacheModel.duracion = getDuracion();
+
 		servicioCacheModel.longitud = getLongitud();
 
 		servicioCacheModel.latitud = getLatitud();
@@ -452,7 +474,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{idServicio=");
 		sb.append(getIdServicio());
@@ -462,6 +484,8 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 		sb.append(getHoraInicio());
 		sb.append(", horaFin=");
 		sb.append(getHoraFin());
+		sb.append(", duracion=");
+		sb.append(getDuracion());
 		sb.append(", longitud=");
 		sb.append(getLongitud());
 		sb.append(", latitud=");
@@ -477,7 +501,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("es.vass.fichaje.model.Servicio");
@@ -498,6 +522,10 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 		sb.append(
 			"<column><column-name>horaFin</column-name><column-value><![CDATA[");
 		sb.append(getHoraFin());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>duracion</column-name><column-value><![CDATA[");
+		sb.append(getDuracion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>longitud</column-name><column-value><![CDATA[");
@@ -529,6 +557,7 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 	private boolean _activo;
 	private Date _horaInicio;
 	private Date _horaFin;
+	private double _duracion;
 	private double _longitud;
 	private double _latitud;
 	private long _idTipoServicio;

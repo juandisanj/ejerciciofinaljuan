@@ -72,7 +72,8 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 			{ "userName", Types.VARCHAR },
 			{ "horaEntrada", Types.TIMESTAMP },
 			{ "horaSalida", Types.TIMESTAMP },
-			{ "horas", Types.DOUBLE }
+			{ "horas", Types.DOUBLE },
+			{ "horasExtra", Types.DOUBLE }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -85,9 +86,10 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 		TABLE_COLUMNS_MAP.put("horaEntrada", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("horaSalida", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("horas", Types.DOUBLE);
+		TABLE_COLUMNS_MAP.put("horasExtra", Types.DOUBLE);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Fichaje_Fichaje (uuid_ VARCHAR(75) null,fichajeId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,horaEntrada DATE null,horaSalida DATE null,horas DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table Fichaje_Fichaje (uuid_ VARCHAR(75) null,fichajeId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,horaEntrada DATE null,horaSalida DATE null,horas DOUBLE,horasExtra DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table Fichaje_Fichaje";
 	public static final String ORDER_BY_JPQL = " ORDER BY fichaje.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Fichaje_Fichaje.userId ASC";
@@ -155,6 +157,7 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 		attributes.put("horaEntrada", getHoraEntrada());
 		attributes.put("horaSalida", getHoraSalida());
 		attributes.put("horas", getHoras());
+		attributes.put("horasExtra", getHorasExtra());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -210,6 +213,12 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 
 		if (horas != null) {
 			setHoras(horas);
+		}
+
+		Double horasExtra = (Double)attributes.get("horasExtra");
+
+		if (horasExtra != null) {
+			setHorasExtra(horasExtra);
 		}
 	}
 
@@ -361,6 +370,16 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 		_horas = horas;
 	}
 
+	@Override
+	public double getHorasExtra() {
+		return _horasExtra;
+	}
+
+	@Override
+	public void setHorasExtra(double horasExtra) {
+		_horasExtra = horasExtra;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -400,6 +419,7 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 		fichajeImpl.setHoraEntrada(getHoraEntrada());
 		fichajeImpl.setHoraSalida(getHoraSalida());
 		fichajeImpl.setHoras(getHoras());
+		fichajeImpl.setHorasExtra(getHorasExtra());
 
 		fichajeImpl.resetOriginalValues();
 
@@ -529,12 +549,14 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 
 		fichajeCacheModel.horas = getHoras();
 
+		fichajeCacheModel.horasExtra = getHorasExtra();
+
 		return fichajeCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -552,6 +574,8 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 		sb.append(getHoraSalida());
 		sb.append(", horas=");
 		sb.append(getHoras());
+		sb.append(", horasExtra=");
+		sb.append(getHorasExtra());
 		sb.append("}");
 
 		return sb.toString();
@@ -559,7 +583,7 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("es.vass.fichaje.model.Fichaje");
@@ -597,6 +621,10 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 			"<column><column-name>horas</column-name><column-value><![CDATA[");
 		sb.append(getHoras());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>horasExtra</column-name><column-value><![CDATA[");
+		sb.append(getHorasExtra());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -621,6 +649,7 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 	private Date _originalHoraEntrada;
 	private Date _horaSalida;
 	private double _horas;
+	private double _horasExtra;
 	private long _columnBitmask;
 	private Fichaje _escapedModel;
 }

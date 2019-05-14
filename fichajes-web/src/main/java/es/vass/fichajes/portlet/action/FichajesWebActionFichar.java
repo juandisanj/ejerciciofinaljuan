@@ -70,7 +70,8 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 			if("Fin jornada".equals(servicioActual)) {
 				
 				try {
-					FichajeLocalServiceUtil.updateEndFichaje(lastFichaje.getFichajeId(), new Date());
+					double horasDia = ServiceDate.calculaHorasFichaje(lastFichaje.getFichajeId());
+					FichajeLocalServiceUtil.updateEndFichaje(lastFichaje.getFichajeId(), new Date(), horasDia);
 				} catch (PortalException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -123,7 +124,9 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 			}
 			
 			try {
-				ServicioLocalServiceUtil.updateEndService(servicio.getIdServicio(), new Date());
+				Date now = new Date();
+				double duracion = (now.getTime() - servicio.getHoraInicio().getTime())/3600000;
+				ServicioLocalServiceUtil.updateEndService(servicio.getIdServicio(), new Date(), duracion);
 				actionRequest.setAttribute("activo", false);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block

@@ -6,7 +6,8 @@ create table Fichaje_Fichaje (
 	userName VARCHAR(75) null,
 	horaEntrada DATE null,
 	horaSalida DATE null,
-	horas DOUBLE
+	horas DOUBLE,
+	horasExtra DOUBLE
 );
 
 create table Fichaje_Servicio (
@@ -14,6 +15,7 @@ create table Fichaje_Servicio (
 	activo BOOLEAN,
 	horaInicio DATE null,
 	horaFin DATE null,
+	duracion DOUBLE,
 	longitud DOUBLE,
 	latitud DOUBLE,
 	idTipoServicio LONG,

@@ -41,6 +41,7 @@ public class FichajeSoap implements Serializable {
 		soapModel.setHoraEntrada(model.getHoraEntrada());
 		soapModel.setHoraSalida(model.getHoraSalida());
 		soapModel.setHoras(model.getHoras());
+		soapModel.setHorasExtra(model.getHorasExtra());
 
 		return soapModel;
 	}
@@ -157,6 +158,14 @@ public class FichajeSoap implements Serializable {
 		_horas = horas;
 	}
 
+	public double getHorasExtra() {
+		return _horasExtra;
+	}
+
+	public void setHorasExtra(double horasExtra) {
+		_horasExtra = horasExtra;
+	}
+
 	private String _uuid;
 	private long _fichajeId;
 	private long _companyId;
@@ -165,4 +174,5 @@ public class FichajeSoap implements Serializable {
 	private Date _horaEntrada;
 	private Date _horaSalida;
 	private double _horas;
+	private double _horasExtra;
 }

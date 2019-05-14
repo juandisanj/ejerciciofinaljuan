@@ -37,6 +37,7 @@ public class ServicioSoap implements Serializable {
 		soapModel.setActivo(model.isActivo());
 		soapModel.setHoraInicio(model.getHoraInicio());
 		soapModel.setHoraFin(model.getHoraFin());
+		soapModel.setDuracion(model.getDuracion());
 		soapModel.setLongitud(model.getLongitud());
 		soapModel.setLatitud(model.getLatitud());
 		soapModel.setIdTipoServicio(model.getIdTipoServicio());
@@ -129,6 +130,14 @@ public class ServicioSoap implements Serializable {
 		_horaFin = horaFin;
 	}
 
+	public double getDuracion() {
+		return _duracion;
+	}
+
+	public void setDuracion(double duracion) {
+		_duracion = duracion;
+	}
+
 	public double getLongitud() {
 		return _longitud;
 	}
@@ -165,6 +174,7 @@ public class ServicioSoap implements Serializable {
 	private boolean _activo;
 	private Date _horaInicio;
 	private Date _horaFin;
+	private double _duracion;
 	private double _longitud;
 	private double _latitud;
 	private long _idTipoServicio;

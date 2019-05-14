@@ -234,8 +234,8 @@ public interface ServicioLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getServiciosCount();
 
-	public boolean updateEndService(long idServicio, Date horaFin)
-		throws PortalException;
+	public boolean updateEndService(long idServicio, Date horaFin,
+		double duracion) throws PortalException;
 
 	/**
 	* Updates the servicio in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

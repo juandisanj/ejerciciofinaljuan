@@ -38,9 +38,10 @@
 		<tr>
 			<th scope="col">Hora Inicio</th>
 			<th scope="col">Hora de Fin</th>
+			<th scope="col">Duración</th>
+			<th scope="col">Tipo Servicio</th>
 			<th scope="col">Longitud</th>
 			<th scope="col">Latitud</th>
-			<th scope="col">Tipo Servicio</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -48,9 +49,10 @@
 			<tr>
 				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaInicio}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
 				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaFin}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+				<td class="card-text">${servicio.duracion}</td>
+				<td class="card-text">${servicio.idTipoServicio}</td>
 				<td class="card-text">${servicio.longitud}</td>
 				<td class="card-text">${servicio.latitud}</td>
-				<td class="card-text">${servicio.idTipoServicio}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

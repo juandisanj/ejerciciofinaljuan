@@ -109,12 +109,13 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		return fichaje;
 	}
 	
-	public boolean updateEndFichaje(long fichajeId, Date horaSalida) throws PortalException {
+	public boolean updateEndFichaje(long fichajeId, Date horaSalida, double horas) throws PortalException {
 		
 		boolean done = false;
 		
 		Fichaje fichaje = getFichaje(fichajeId);
 		fichaje.setHoraSalida(horaSalida);
+		fichaje.setHoras(horas);
 		
 		try {
 			updateFichaje(fichaje);

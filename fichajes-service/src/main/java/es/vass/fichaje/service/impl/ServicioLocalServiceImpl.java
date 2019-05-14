@@ -80,12 +80,13 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 		return servicio;
 	}
 	
-	public boolean updateEndService(long idServicio, Date horaFin) throws PortalException {
+	public boolean updateEndService(long idServicio, Date horaFin, double duracion) throws PortalException {
 		
 		boolean done = false;
 		Servicio servicio = getServicio(idServicio);
 		servicio.setActivo(false);
 		servicio.setHoraFin(horaFin);
+		servicio.setDuracion(duracion);
 	
 		try {
 			updateServicio(servicio);

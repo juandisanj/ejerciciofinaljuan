@@ -61,6 +61,7 @@ public class ServicioWrapper implements Servicio, ModelWrapper<Servicio> {
 		attributes.put("activo", isActivo());
 		attributes.put("horaInicio", getHoraInicio());
 		attributes.put("horaFin", getHoraFin());
+		attributes.put("duracion", getDuracion());
 		attributes.put("longitud", getLongitud());
 		attributes.put("latitud", getLatitud());
 		attributes.put("idTipoServicio", getIdTipoServicio());
@@ -93,6 +94,12 @@ public class ServicioWrapper implements Servicio, ModelWrapper<Servicio> {
 
 		if (horaFin != null) {
 			setHoraFin(horaFin);
+		}
+
+		Double duracion = (Double)attributes.get("duracion");
+
+		if (duracion != null) {
+			setDuracion(duracion);
 		}
 
 		Double longitud = (Double)attributes.get("longitud");
@@ -138,6 +145,16 @@ public class ServicioWrapper implements Servicio, ModelWrapper<Servicio> {
 	@Override
 	public boolean getActivo() {
 		return _servicio.getActivo();
+	}
+
+	/**
+	* Returns the duracion of this servicio.
+	*
+	* @return the duracion of this servicio
+	*/
+	@Override
+	public double getDuracion() {
+		return _servicio.getDuracion();
 	}
 
 	@Override
@@ -278,6 +295,16 @@ public class ServicioWrapper implements Servicio, ModelWrapper<Servicio> {
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_servicio.setCachedModel(cachedModel);
+	}
+
+	/**
+	* Sets the duracion of this servicio.
+	*
+	* @param duracion the duracion of this servicio
+	*/
+	@Override
+	public void setDuracion(double duracion) {
+		_servicio.setDuracion(duracion);
 	}
 
 	@Override

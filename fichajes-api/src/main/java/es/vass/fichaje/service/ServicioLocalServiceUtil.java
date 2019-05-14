@@ -260,9 +260,9 @@ public class ServicioLocalServiceUtil {
 	}
 
 	public static boolean updateEndService(long idServicio,
-		java.util.Date horaFin)
+		java.util.Date horaFin, double duracion)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().updateEndService(idServicio, horaFin);
+		return getService().updateEndService(idServicio, horaFin, duracion);
 	}
 
 	/**

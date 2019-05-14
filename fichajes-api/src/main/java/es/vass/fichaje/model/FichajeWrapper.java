@@ -65,6 +65,7 @@ public class FichajeWrapper implements Fichaje, ModelWrapper<Fichaje> {
 		attributes.put("horaEntrada", getHoraEntrada());
 		attributes.put("horaSalida", getHoraSalida());
 		attributes.put("horas", getHoras());
+		attributes.put("horasExtra", getHorasExtra());
 
 		return attributes;
 	}
@@ -117,6 +118,12 @@ public class FichajeWrapper implements Fichaje, ModelWrapper<Fichaje> {
 
 		if (horas != null) {
 			setHoras(horas);
+		}
+
+		Double horasExtra = (Double)attributes.get("horasExtra");
+
+		if (horasExtra != null) {
+			setHorasExtra(horasExtra);
 		}
 	}
 
@@ -183,6 +190,16 @@ public class FichajeWrapper implements Fichaje, ModelWrapper<Fichaje> {
 	@Override
 	public Date getHoraSalida() {
 		return _fichaje.getHoraSalida();
+	}
+
+	/**
+	* Returns the horas extra of this fichaje.
+	*
+	* @return the horas extra of this fichaje
+	*/
+	@Override
+	public double getHorasExtra() {
+		return _fichaje.getHorasExtra();
 	}
 
 	/**
@@ -334,6 +351,16 @@ public class FichajeWrapper implements Fichaje, ModelWrapper<Fichaje> {
 	@Override
 	public void setHoraSalida(Date horaSalida) {
 		_fichaje.setHoraSalida(horaSalida);
+	}
+
+	/**
+	* Sets the horas extra of this fichaje.
+	*
+	* @param horasExtra the horas extra of this fichaje
+	*/
+	@Override
+	public void setHorasExtra(double horasExtra) {
+		_fichaje.setHorasExtra(horasExtra);
 	}
 
 	@Override

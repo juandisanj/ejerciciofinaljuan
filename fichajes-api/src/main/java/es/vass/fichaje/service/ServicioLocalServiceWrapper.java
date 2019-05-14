@@ -272,9 +272,11 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 	}
 
 	@Override
-	public boolean updateEndService(long idServicio, java.util.Date horaFin)
+	public boolean updateEndService(long idServicio, java.util.Date horaFin,
+		double duracion)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _servicioLocalService.updateEndService(idServicio, horaFin);
+		return _servicioLocalService.updateEndService(idServicio, horaFin,
+			duracion);
 	}
 
 	/**

@@ -125,6 +125,20 @@ public interface ServicioModel extends BaseModel<Servicio> {
 	public void setHoraFin(Date horaFin);
 
 	/**
+	 * Returns the duracion of this servicio.
+	 *
+	 * @return the duracion of this servicio
+	 */
+	public double getDuracion();
+
+	/**
+	 * Sets the duracion of this servicio.
+	 *
+	 * @param duracion the duracion of this servicio
+	 */
+	public void setDuracion(double duracion);
+
+	/**
 	 * Returns the longitud of this servicio.
 	 *
 	 * @return the longitud of this servicio

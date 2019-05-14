@@ -64,7 +64,7 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{idServicio=");
 		sb.append(idServicio);
@@ -74,6 +74,8 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 		sb.append(horaInicio);
 		sb.append(", horaFin=");
 		sb.append(horaFin);
+		sb.append(", duracion=");
+		sb.append(duracion);
 		sb.append(", longitud=");
 		sb.append(longitud);
 		sb.append(", latitud=");
@@ -108,6 +110,7 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 			servicioImpl.setHoraFin(new Date(horaFin));
 		}
 
+		servicioImpl.setDuracion(duracion);
 		servicioImpl.setLongitud(longitud);
 		servicioImpl.setLatitud(latitud);
 		servicioImpl.setIdTipoServicio(idTipoServicio);
@@ -125,6 +128,8 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 		activo = objectInput.readBoolean();
 		horaInicio = objectInput.readLong();
 		horaFin = objectInput.readLong();
+
+		duracion = objectInput.readDouble();
 
 		longitud = objectInput.readDouble();
 
@@ -144,6 +149,8 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 		objectOutput.writeLong(horaInicio);
 		objectOutput.writeLong(horaFin);
 
+		objectOutput.writeDouble(duracion);
+
 		objectOutput.writeDouble(longitud);
 
 		objectOutput.writeDouble(latitud);
@@ -157,6 +164,7 @@ public class ServicioCacheModel implements CacheModel<Servicio>, Externalizable 
 	public boolean activo;
 	public long horaInicio;
 	public long horaFin;
+	public double duracion;
 	public double longitud;
 	public double latitud;
 	public long idTipoServicio;

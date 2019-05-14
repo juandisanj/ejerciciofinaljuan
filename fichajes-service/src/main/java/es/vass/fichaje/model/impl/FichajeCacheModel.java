@@ -64,7 +64,7 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -82,6 +82,8 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 		sb.append(horaSalida);
 		sb.append(", horas=");
 		sb.append(horas);
+		sb.append(", horasExtra=");
+		sb.append(horasExtra);
 		sb.append("}");
 
 		return sb.toString();
@@ -124,6 +126,7 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 		}
 
 		fichajeImpl.setHoras(horas);
+		fichajeImpl.setHorasExtra(horasExtra);
 
 		fichajeImpl.resetOriginalValues();
 
@@ -144,6 +147,8 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 		horaSalida = objectInput.readLong();
 
 		horas = objectInput.readDouble();
+
+		horasExtra = objectInput.readDouble();
 	}
 
 	@Override
@@ -173,6 +178,8 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 		objectOutput.writeLong(horaSalida);
 
 		objectOutput.writeDouble(horas);
+
+		objectOutput.writeDouble(horasExtra);
 	}
 
 	public String uuid;
@@ -183,4 +190,5 @@ public class FichajeCacheModel implements CacheModel<Fichaje>, Externalizable {
 	public long horaEntrada;
 	public long horaSalida;
 	public double horas;
+	public double horasExtra;
 }

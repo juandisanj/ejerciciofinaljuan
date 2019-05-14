@@ -321,9 +321,11 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
-	public boolean updateEndFichaje(long fichajeId, java.util.Date horaSalida)
+	public boolean updateEndFichaje(long fichajeId, java.util.Date horaSalida,
+		double horas)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _fichajeLocalService.updateEndFichaje(fichajeId, horaSalida);
+		return _fichajeLocalService.updateEndFichaje(fichajeId, horaSalida,
+			horas);
 	}
 
 	/**
