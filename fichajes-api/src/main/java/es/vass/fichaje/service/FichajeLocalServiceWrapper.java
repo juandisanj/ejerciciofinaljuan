@@ -200,6 +200,18 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
+	public java.util.List<es.vass.fichaje.model.Fichaje> findByDate(
+		java.util.Date date) {
+		return _fichajeLocalService.findByDate(date);
+	}
+
+	@Override
+	public es.vass.fichaje.model.Fichaje findById(long idFichaje)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _fichajeLocalService.findById(idFichaje);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _fichajeLocalService.getActionableDynamicQuery();
 	}

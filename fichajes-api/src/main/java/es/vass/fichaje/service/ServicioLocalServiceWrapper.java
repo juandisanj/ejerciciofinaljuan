@@ -188,6 +188,18 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 	}
 
 	@Override
+	public java.util.List<es.vass.fichaje.model.Servicio> findByIdFichaje(
+		long idFichaje) {
+		return _servicioLocalService.findByIdFichaje(idFichaje);
+	}
+
+	@Override
+	public es.vass.fichaje.model.Servicio findByIdServicio(long idServicio)
+		throws es.vass.fichaje.exception.NoSuchServicioException {
+		return _servicioLocalService.findByIdServicio(idServicio);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _servicioLocalService.getActionableDynamicQuery();
 	}
