@@ -446,6 +446,136 @@ public interface FichajePersistence extends BasePersistence<Fichaje> {
 	public int countByFecha(Date horaEntrada);
 
 	/**
+	* Returns all the fichajes where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching fichajes
+	*/
+	public java.util.List<Fichaje> findByUserId(long userId);
+
+	/**
+	* Returns a range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @return the range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByUserId(long userId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByUserId(long userId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching fichajes
+	*/
+	public java.util.List<Fichaje> findByUserId(long userId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public Fichaje findByUserId_First(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Returns the first fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public Fichaje fetchByUserId_First(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns the last fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public Fichaje findByUserId_Last(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Returns the last fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public Fichaje fetchByUserId_Last(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator);
+
+	/**
+	* Returns the fichajes before and after the current fichaje in the ordered set where userId = &#63;.
+	*
+	* @param fichajeId the primary key of the current fichaje
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next fichaje
+	* @throws NoSuchFichajeException if a fichaje with the primary key could not be found
+	*/
+	public Fichaje[] findByUserId_PrevAndNext(long fichajeId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Fichaje> orderByComparator)
+		throws NoSuchFichajeException;
+
+	/**
+	* Removes all the fichajes where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	*/
+	public void removeByUserId(long userId);
+
+	/**
+	* Returns the number of fichajes where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching fichajes
+	*/
+	public int countByUserId(long userId);
+
+	/**
 	* Caches the fichaje in the entity cache if it is enabled.
 	*
 	* @param fichaje the fichaje

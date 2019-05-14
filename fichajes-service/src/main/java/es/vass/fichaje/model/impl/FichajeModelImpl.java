@@ -105,8 +105,8 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long HORAENTRADA_COLUMN_BITMASK = 2L;
-	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long USERID_COLUMN_BITMASK = 8L;
+	public static final long USERID_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(es.vass.fichaje.service.util.ServiceProps.get(
 				"lock.expiration.time.es.vass.fichaje.model.Fichaje"));
 
@@ -277,6 +277,12 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 	public void setUserId(long userId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -294,6 +300,10 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@Override
@@ -464,6 +474,10 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 
 		fichajeModelImpl._setOriginalCompanyId = false;
 
+		fichajeModelImpl._originalUserId = fichajeModelImpl._userId;
+
+		fichajeModelImpl._setOriginalUserId = false;
+
 		fichajeModelImpl._originalHoraEntrada = fichajeModelImpl._horaEntrada;
 
 		fichajeModelImpl._columnBitmask = 0;
@@ -600,6 +614,8 @@ public class FichajeModelImpl extends BaseModelImpl<Fichaje>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _horaEntrada;
 	private Date _originalHoraEntrada;

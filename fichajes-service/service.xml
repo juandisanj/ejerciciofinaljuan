@@ -36,6 +36,9 @@
 		<finder name="Fecha" return-type="Collection">
 			<finder-column name="horaEntrada" />
 		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
 
 		<!-- References -->
 

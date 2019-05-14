@@ -195,6 +195,10 @@ public class FichajeLocalServiceUtil {
 		return getService().fetchFichajeByUuidAndCompanyId(uuid, companyId);
 	}
 
+	public static java.util.List<es.vass.fichaje.model.Fichaje> findAll() {
+		return getService().findAll();
+	}
+
 	public static java.util.List<es.vass.fichaje.model.Fichaje> findByDate(
 		java.util.Date date) {
 		return getService().findByDate(date);
@@ -203,6 +207,16 @@ public class FichajeLocalServiceUtil {
 	public static es.vass.fichaje.model.Fichaje findById(long idFichaje)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().findById(idFichaje);
+	}
+
+	public static java.util.List<es.vass.fichaje.model.Fichaje> findByUserId(
+		long userId) {
+		return getService().findByUserId(userId);
+	}
+
+	public static java.util.List<es.vass.fichaje.model.Fichaje> findByUsernameDate(
+		String userName, java.util.Date initDay, java.util.Date endDay) {
+		return getService().findByUsernameDate(userName, initDay, endDay);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

@@ -200,6 +200,11 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
+	public java.util.List<es.vass.fichaje.model.Fichaje> findAll() {
+		return _fichajeLocalService.findAll();
+	}
+
+	@Override
 	public java.util.List<es.vass.fichaje.model.Fichaje> findByDate(
 		java.util.Date date) {
 		return _fichajeLocalService.findByDate(date);
@@ -209,6 +214,18 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	public es.vass.fichaje.model.Fichaje findById(long idFichaje)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _fichajeLocalService.findById(idFichaje);
+	}
+
+	@Override
+	public java.util.List<es.vass.fichaje.model.Fichaje> findByUserId(
+		long userId) {
+		return _fichajeLocalService.findByUserId(userId);
+	}
+
+	@Override
+	public java.util.List<es.vass.fichaje.model.Fichaje> findByUsernameDate(
+		String userName, java.util.Date initDay, java.util.Date endDay) {
+		return _fichajeLocalService.findByUsernameDate(userName, initDay, endDay);
 	}
 
 	@Override

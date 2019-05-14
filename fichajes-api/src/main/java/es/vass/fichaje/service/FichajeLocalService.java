@@ -186,9 +186,16 @@ public interface FichajeLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Fichaje fetchFichajeByUuidAndCompanyId(String uuid, long companyId);
 
+	public List<Fichaje> findAll();
+
 	public List<Fichaje> findByDate(Date date);
 
 	public Fichaje findById(long idFichaje) throws PortalException;
+
+	public List<Fichaje> findByUserId(long userId);
+
+	public List<Fichaje> findByUsernameDate(String userName, Date initDay,
+		Date endDay);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

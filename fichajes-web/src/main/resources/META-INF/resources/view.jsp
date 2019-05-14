@@ -8,6 +8,8 @@
 	<b><liferay-ui:message key="fichajesweb.caption"/></b>
 </p>
 
+<portlet:actionURL name="fichajeServicio" var="gestionaServicioUrl" />
+
 <aui:form action="${gestionaServicioUrl}">
 	<aui:select name="servicio">
 		<c:forEach items="${listaTipoServicios}" var="tipoServicio">

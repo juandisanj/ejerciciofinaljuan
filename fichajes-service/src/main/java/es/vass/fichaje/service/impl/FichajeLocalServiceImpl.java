@@ -14,8 +14,16 @@
 
 package es.vass.fichaje.service.impl;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -60,9 +68,27 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		return fichaje;
 	}
 	
+	public List<Fichaje> findAll(){
+		List<Fichaje> listaFichajes = FichajeUtil.findAll();
+		return listaFichajes;
+	}
+	
+	public List<Fichaje> findByUserId(long userId) {
+		List<Fichaje> listaFichajes = FichajeUtil.findByUserId(userId);
+		return listaFichajes;
+	}
+	
 	public List<Fichaje> findByDate(Date date){
 		List<Fichaje> listaFichajes = FichajeUtil.findByFecha(date);
 		return listaFichajes;
+	}
+	
+	public List<Fichaje> findByUsernameDate(String userName, Date initDay, Date endDay){
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Fichaje.class, FichajeImpl.class.getClassLoader());
+		query.add(PropertyFactoryUtil.forName("userName").like("%"+userName+"%"));
+		query.add(RestrictionsFactoryUtil.between("horaEntrada", initDay, endDay));
+		List<Fichaje> listFichajes = FichajeLocalServiceUtil.dynamicQuery(query);
+		return listFichajes;
 	}
 	
 }
