@@ -63,7 +63,7 @@ public interface ServicioLocalService extends BaseLocalService,
 	 * Never modify or reference this interface directly. Always use {@link ServicioLocalServiceUtil} to access the servicio local service. Add custom service methods to {@link es.vass.fichaje.service.impl.ServicioLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public void addServicio(Date horaInicio, long tipoServicio,
-		double longitud, double latitud);
+		double longitud, double latitud, long fichajeId);
 
 	/**
 	* Adds the servicio to the database. Also notifies the appropriate model listeners.
@@ -177,6 +177,8 @@ public interface ServicioLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Servicio fetchServicio(long idServicio);
 
+	public Servicio findByFichajeId_Last(long fichajeId);
+
 	public List<Servicio> findByIdFichaje(long idFichaje);
 
 	public Servicio findByIdServicio(long idServicio)
@@ -231,6 +233,9 @@ public interface ServicioLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getServiciosCount();
+
+	public boolean updateEndService(long idServicio, Date horaFin)
+		throws PortalException;
 
 	/**
 	* Updates the servicio in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

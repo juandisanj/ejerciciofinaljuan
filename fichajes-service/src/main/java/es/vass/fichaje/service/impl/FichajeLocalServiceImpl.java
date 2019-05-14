@@ -20,13 +20,10 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import es.vass.fichaje.exception.NoSuchFichajeException;
 import es.vass.fichaje.model.Fichaje;
 import es.vass.fichaje.model.impl.FichajeImpl;
 import es.vass.fichaje.service.FichajeLocalServiceUtil;
@@ -54,18 +51,15 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 	 * Never reference this class directly. Always use {@link es.vass.fichaje.service.FichajeLocalServiceUtil} to access the fichaje local service.
 	 */
 	
-	public void addFichaje(long companyId, long userId, Date horaEntrada) {
+	public void addFichaje(long companyId, long userId, String userName) {
 		Fichaje fichaje = new FichajeImpl();
 		fichaje.setFichajeId(counterLocalService.increment());
 		fichaje.setCompanyId(companyId);
-		fichaje.setHoraEntrada(horaEntrada);
+		fichaje.setUserId(userId);
+		fichaje.setUserName(userName);
+		fichaje.setHoraEntrada(new Date());
 		
 		addFichaje(fichaje);
-	}
-	
-	public Fichaje findById(long idFichaje) throws PortalException {
-		Fichaje fichaje = FichajeUtil.findByPrimaryKey(idFichaje);
-		return fichaje;
 	}
 	
 	public List<Fichaje> findAll(){
@@ -89,6 +83,47 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		query.add(RestrictionsFactoryUtil.between("horaEntrada", initDay, endDay));
 		List<Fichaje> listFichajes = FichajeLocalServiceUtil.dynamicQuery(query);
 		return listFichajes;
+	}
+	
+	public List<Fichaje> findByUserIdDate(long userId, Date initDay, Date endDay){
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Fichaje.class, FichajeImpl.class.getClassLoader());
+		query.add(PropertyFactoryUtil.forName("userId").eq(userId));
+		query.add(RestrictionsFactoryUtil.between("horaEntrada", initDay, endDay));
+		List<Fichaje> listFichajes = FichajeLocalServiceUtil.dynamicQuery(query);
+		return listFichajes;
+	}
+	
+	public Fichaje findById(long idFichaje) throws PortalException {
+		Fichaje fichaje = FichajeUtil.findByPrimaryKey(idFichaje);
+		return fichaje;
+	}
+	
+	public Fichaje findByUserId_Last(long userId) {
+		Fichaje fichaje = null;
+		try {
+			fichaje = FichajeUtil.findByUserId_Last(userId, null);
+		} catch (NoSuchFichajeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fichaje;
+	}
+	
+	public boolean updateEndFichaje(long fichajeId, Date horaSalida) throws PortalException {
+		
+		boolean done = false;
+		
+		Fichaje fichaje = getFichaje(fichajeId);
+		fichaje.setHoraSalida(horaSalida);
+		
+		try {
+			updateFichaje(fichaje);
+			done = true;
+		}catch(Exception e) {
+			e.getMessage();
+		}
+		
+		return done;
 	}
 	
 }

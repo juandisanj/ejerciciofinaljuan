@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletException;
@@ -43,7 +44,7 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		String userName = td.getUser().getFirstName();
 		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(td.getUserId());
 		
-		List<Fichaje> listaFichajes = null;
+		List<Fichaje> listaFichajes = new ArrayList<>();
 		try {
 			listaFichajes = (List<Fichaje>) renderRequest.getAttribute("listaFichajesFiltro");
 		}catch(Exception e) {
@@ -52,11 +53,16 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		}
 		
 		if(listaFichajes == null || listaFichajes.size() == 0) {
-			listaFichajes = FichajeLocalServiceUtil.findAll();
+			for(Role r : userRoles) {
+				if(userRoles.contains("Administrator") || userRoles.contains("RRHH")) {
+					listaFichajes = FichajeLocalServiceUtil.findAll();
+				}else {
+					listaFichajes = FichajeLocalServiceUtil.findByUserId(td.getUserId());
+				}
+			}
+			
 			renderRequest.setAttribute("listaFichajes", listaFichajes);
 		}
-		// Añadir if para que indique cuando el filtro no ha devuelto resultados
-		
 		
 		System.out.println("Roles del usuario ");
 		for (Role r : userRoles) {

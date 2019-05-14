@@ -11,20 +11,22 @@
 <portlet:actionURL name="fichajeServicio" var="gestionaServicioUrl" />
 
 <aui:form action="${gestionaServicioUrl}">
-	<aui:select name="servicio">
-		<c:forEach items="${listaTipoServicios}" var="tipoServicio">
-			<aui:option value="${tipoServicio.idTipoServicio}" label="${tipoServicio.nombre}" />
-		</c:forEach>
-	</aui:select>
 	
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${}"> --%>
-<!-- 			<aui:button name="iniciaServicioButton" type="submit" value="Iniciar" /> -->
-<!-- 			<aui:button name="paraServicioButton" type="submit" value="Parar" /> -->
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-<!-- 			<aui:button name="iniciaServicioButton" type="submit" value="Iniciar" /> -->
-<!-- 			<aui:button name="paraServicioButton" type="submit" value="Parar" /> -->
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
+	<c:choose>
+		<c:when test="${activo == false}">
+			<aui:select name="tipoServicio">
+				<c:forEach items="${listaTipoServicios}" var="tipoServicio">
+					<aui:option value="${tipoServicio.idTipoServicio}" label="${tipoServicio.nombre}" />
+				</c:forEach>
+			</aui:select>
+			<aui:input name="process" type="hidden" value="start" />
+		
+			<aui:button name="iniciaServicioButton" type="submit" value="Iniciar" />
+		</c:when>
+		<c:otherwise>
+			<aui:input name="process" type="hidden" value="end" />
+		
+			<aui:button name="paraServicioButton" type="submit" value="Parar" />
+		</c:otherwise>
+	</c:choose>
 </aui:form>

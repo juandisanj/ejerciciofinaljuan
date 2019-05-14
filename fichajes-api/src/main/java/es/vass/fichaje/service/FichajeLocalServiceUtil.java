@@ -54,9 +54,8 @@ public class FichajeLocalServiceUtil {
 		return getService().addFichaje(fichaje);
 	}
 
-	public static void addFichaje(long companyId, long userId,
-		java.util.Date horaEntrada) {
-		getService().addFichaje(companyId, userId, horaEntrada);
+	public static void addFichaje(long companyId, long userId, String userName) {
+		getService().addFichaje(companyId, userId, userName);
 	}
 
 	/**
@@ -214,6 +213,15 @@ public class FichajeLocalServiceUtil {
 		return getService().findByUserId(userId);
 	}
 
+	public static es.vass.fichaje.model.Fichaje findByUserId_Last(long userId) {
+		return getService().findByUserId_Last(userId);
+	}
+
+	public static java.util.List<es.vass.fichaje.model.Fichaje> findByUserIdDate(
+		long userId, java.util.Date initDay, java.util.Date endDay) {
+		return getService().findByUserIdDate(userId, initDay, endDay);
+	}
+
 	public static java.util.List<es.vass.fichaje.model.Fichaje> findByUsernameDate(
 		String userName, java.util.Date initDay, java.util.Date endDay) {
 		return getService().findByUsernameDate(userName, initDay, endDay);
@@ -291,6 +299,12 @@ public class FichajeLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static boolean updateEndFichaje(long fichajeId,
+		java.util.Date horaSalida)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().updateEndFichaje(fichajeId, horaSalida);
 	}
 
 	/**
