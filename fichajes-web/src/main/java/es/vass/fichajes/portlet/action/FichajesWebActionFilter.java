@@ -22,6 +22,7 @@ import es.vass.fichaje.model.Fichaje;
 import es.vass.fichaje.service.FichajeLocalServiceUtil;
 import es.vass.fichajes.constants.FichajesWebPortletKeys;
 import es.vass.fichajes.utils.ServiceDate;
+import es.vass.fichajes.utils.ServiceRole;
 
 @Component(
 		immediate = true,
@@ -41,7 +42,6 @@ public class FichajesWebActionFilter implements MVCActionCommand {
 		_log.info("Method FichajesWebActionFilter.processAction: Action del filtro de Fichajes");
 		
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(td.getUserId());
 		
 		String initDateString = actionRequest.getParameter("initDate");
 		Date initDate = ServiceDate.stringToDate("yyyy-MM-dd", initDateString);
@@ -50,17 +50,17 @@ public class FichajesWebActionFilter implements MVCActionCommand {
 		String userName = actionRequest.getParameter("userName");
 		
 		List<Fichaje> listaFichajesFiltro = new ArrayList<>();
-		if(userRoles.contains("Administrator") || userRoles.contains("RRHH")) {
+		List<String> roles = new ArrayList<>();
+		roles.add("Administrator");
+		roles.add("RRHH");
+		
+		if(ServiceRole.checkRoles(td.getUser(), roles)) {
 			listaFichajesFiltro = FichajeLocalServiceUtil.findByUsernameDate(userName, initDate, endDate);
 		}else {
 			listaFichajesFiltro = FichajeLocalServiceUtil.findByUserIdDate(td.getUserId(), initDate, endDate);
 		}
 		
-		System.out.println("Tamaño de la lista: " + listaFichajesFiltro.size());
-		
 		actionRequest.setAttribute("listaFichajesFiltro", listaFichajesFiltro);
-		
-		System.out.println("Fechas recibidas para realizar el filtro2: " + endDate);
 		
 		actionResponse.setRenderParameter("mvcRenderCommandName", "/listFichajes");
 		

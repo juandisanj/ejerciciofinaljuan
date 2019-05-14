@@ -7,6 +7,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,17 +60,14 @@ public class FichajesWebPortlet extends MVCPortlet {
 			e.getMessage();
 			_log.error("Method FichajesWebPortlet.render: Error al recuperar el atributo activo");
 		}
-
-		
+	
 		try {
 			
-			// Buscar el fichaje de hoy
+			// Buscar el fichaje de hoy, y, en caso de que no exista, establecer activo a false
 			Date initDay = ServiceDate.toMomentOfDay("init", new Date());
 			Date endDay = ServiceDate.toMomentOfDay("end", new Date());
 			
-			System.out.println("Fechas enviadas al buscar: " + initDay + ", " + endDay);
-			
-			List<Fichaje> fichaje = null;
+			List<Fichaje> fichaje = new ArrayList<>();
 			try {
 				fichaje = FichajeLocalServiceUtil.findByUserIdDate(td.getUserId(), initDay, endDay);
 			}catch(Exception e) {
@@ -81,7 +79,7 @@ public class FichajesWebPortlet extends MVCPortlet {
 				activo = false;
 			}
 			
-			// Recuperar el id del Fichaje para comprobar su el último servicio está activo
+			// En caso de que ya haya fichado, recuperar el último servicio y comprobar si está activo
 			long idFichaje = 0;
 			
 			System.out.println("Tamaño de la lista: " + fichaje.size());
@@ -95,18 +93,12 @@ public class FichajesWebPortlet extends MVCPortlet {
 				activo = true;
 			}
 			
-			System.out.println("Activo: " + servicio.getActivo());
-			
-		}catch(Exception e) {	// Si no tiene fichaje, activo continua en true
+		}catch(Exception e) {
 			e.getMessage();
 			_log.error("Method FichajesWebPortlet.render: Error al tratar de recuperar el estado del Servicio actual");
 		}
 		
 		List<TipoServicio> listaTipoServicios = TipoServicioLocalServiceUtil.findAll();
-		
-		// Recuperar el estado del último servicio para indicar qué botón debe estar activo
-		
-		System.out.println("Listado de tipos de servicios recuperado: " + listaTipoServicios.size());
 		
 		renderRequest.setAttribute("listaTipoServicios", listaTipoServicios);
 		renderRequest.setAttribute("activo", activo);

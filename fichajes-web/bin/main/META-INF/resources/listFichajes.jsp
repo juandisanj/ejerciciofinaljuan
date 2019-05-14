@@ -23,7 +23,9 @@
 	</div>
 </aui:form>
 
-
+<c:if test="${error == 'No Coincidencias'}">
+	<div class="alert alert-danger" role="alert">No se han encontrado resultados que se ajusten a la búsqueda</div>
+</c:if>
 
 <liferay-ui:search-container emptyResultsMessage="No existen usuarios">
 	<liferay-ui:search-container-results results="${listaFichajes}" />

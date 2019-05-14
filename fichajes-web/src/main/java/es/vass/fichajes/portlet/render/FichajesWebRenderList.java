@@ -1,11 +1,8 @@
 package es.vass.fichajes.portlet.render;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -21,6 +18,7 @@ import org.osgi.service.component.annotations.Component;
 import es.vass.fichaje.model.Fichaje;
 import es.vass.fichaje.service.FichajeLocalServiceUtil;
 import es.vass.fichajes.constants.FichajesWebPortletKeys;
+import es.vass.fichajes.utils.ServiceRole;
 
 @Component(
 		immediate = true,
@@ -37,45 +35,34 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		
 		_log.info("Method FichajesWebRenderList.render: Renderizado del listado de fichajes");
 		
-		// Recuperar los roles del usuario en sesión, (Administrator, RRHH, User
-		// Si el usuario es rrhh o administrador, enviar el listado completo de fichajes, 
-		// en caso de que sea un empleado normal, enviar el listado de sus fichajes
 		ThemeDisplay td = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		String userName = td.getUser().getFirstName();
-		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(td.getUserId());
 		
 		List<Fichaje> listaFichajes = new ArrayList<>();
 		try {
 			listaFichajes = (List<Fichaje>) renderRequest.getAttribute("listaFichajesFiltro");
+			if(listaFichajes != null && listaFichajes.size() == 0) {
+				renderRequest.setAttribute("error", "No Coincidencias");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			_log.warn("Method FichajesWebRenderList.render: No se recupera listado filtrado de fichajes");
 		}
 		
 		if(listaFichajes == null || listaFichajes.size() == 0) {
-			for(Role r : userRoles) {
-				if(r.getName().
-						
-						
-						contains("Administrator") || userRoles.contains("RRHH")) {
-					listaFichajes = FichajeLocalServiceUtil.findAll();
-					
-				}else {
-					listaFichajes = FichajeLocalServiceUtil.findByUserId(td.getUserId());
-				}
+			
+			List<String> roles = new ArrayList<>();
+			roles.add("Administrator");
+			roles.add("RRHH");
+			if(ServiceRole.checkRoles(td.getUser(), roles)) {
+				listaFichajes = FichajeLocalServiceUtil.findAll();
+			}else {
+				listaFichajes = FichajeLocalServiceUtil.findByUserId(td.getUserId());
 			}
 			
 			renderRequest.setAttribute("listaFichajes", listaFichajes);
-		}
-		
-		System.out.println("Roles del usuario ");
-		for (Role r : userRoles) {
-			try {
-				System.out.println("Rol Class name " + r.getClassName() + ", rol " + r.getDescriptiveName() + ", title " + r.getTitle());
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}else {
+			renderRequest.setAttribute("error", "Existen datos");
 		}
 		
 		return "/listFichajes.jsp";

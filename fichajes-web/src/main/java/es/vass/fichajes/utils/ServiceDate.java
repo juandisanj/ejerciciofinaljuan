@@ -10,7 +10,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
+import es.vass.fichaje.model.Servicio;
+import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichajes.exceptions.ChangeDateException;
 
 public class ServiceDate {
@@ -90,5 +93,21 @@ public class ServiceDate {
 		return modifyDate;
 	}
 	
+	public static double calculaHorasFichaje(long idFichaje) {
+		double horasTotales = 0.0;
+		
+		long suma = 0;
+		
+		List<Servicio> listaServicios = ServicioLocalServiceUtil.findByIdFichaje(idFichaje);
+		
+		for(Servicio s : listaServicios) {
+			long tiempoServicio = s.getHoraFin().getTime() - s.getHoraInicio().getTime();
+			suma += tiempoServicio;
+		}
+		
+		horasTotales = suma/3600000;
+		
+		return horasTotales;
+	}
 	
 }
