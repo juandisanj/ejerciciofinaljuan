@@ -3,8 +3,11 @@ package es.vass.fichajes.portlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.portlet.Portlet;
@@ -14,9 +17,14 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+import es.vass.fichaje.model.Fichaje;
+import es.vass.fichaje.model.Servicio;
 import es.vass.fichaje.model.TipoServicio;
+import es.vass.fichaje.service.FichajeLocalServiceUtil;
+import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.TipoServicioLocalServiceUtil;
 import es.vass.fichajes.constants.FichajesWebPortletKeys;
+import es.vass.fichajes.utils.ServiceDate;
 
 /**
  * @author juand
@@ -42,11 +50,60 @@ public class FichajesWebPortlet extends MVCPortlet {
 		
 		_log.info("Method FichajesWebPortlet.render: Renderizado de la página de Fichajes");
 		
+		ThemeDisplay td = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		
+		boolean activo = true;
+		try {
+			activo = (boolean) renderRequest.getAttribute("activo");
+		}catch(Exception e) {
+			e.getMessage();
+			_log.error("Method FichajesWebPortlet.render: Renderizado de la página de Fichajes");
+		}
+		
+		try {
+			
+			// Buscar el fichaje de hoy
+			Date initDay = ServiceDate.toMomentOfDay("init", new Date());
+			Date endDay = ServiceDate.toMomentOfDay("end", new Date());
+			
+			System.out.println("Fechas enviadas al buscar: " + initDay + ", " + endDay);
+			
+			List<Fichaje> fichaje = null;
+			try {
+				fichaje = FichajeLocalServiceUtil.findByUserIdDate(td.getUserId(), initDay, endDay);
+			}catch(Exception e) {
+				e.getMessage();
+				_log.error("Method FichajesWebPortlet.render: Error al tratar de recuperar el fichaje del día actual");
+			}
+			
+			long idFichaje = 0;
+			
+			System.out.println("Tamaño de la lista: " + fichaje.size());
+			// Buscar el último de servicio del fichaje de hoy
+			for(Fichaje f : fichaje) {
+				idFichaje = f.getFichajeId();
+			}
+			
+			Servicio servicio = ServicioLocalServiceUtil.findByFichajeId_Last(idFichaje);
+			if(servicio.getActivo() == true) {
+				activo = false;
+			}
+			
+		}catch(Exception e) {
+			e.getMessage();
+			_log.error("Method FichajesWebPortlet.render: Error al tratar de recuperar el estado del Servicio actual");
+			activo = false;
+		}
+		
 		List<TipoServicio> listaTipoServicios = TipoServicioLocalServiceUtil.findAll();
+		
+		// Recuperar el estado del último servicio para indicar qué botón debe estar activo
 		
 		System.out.println("Listado de tipos de servicios recuperado: " + listaTipoServicios.size());
 		
 		renderRequest.setAttribute("listaTipoServicios", listaTipoServicios);
+		renderRequest.setAttribute("activo", activo);
 		
 		super.render(renderRequest, renderResponse);
 	}

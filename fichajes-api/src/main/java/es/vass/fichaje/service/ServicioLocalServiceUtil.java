@@ -43,8 +43,9 @@ public class ServicioLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link es.vass.fichaje.service.impl.ServicioLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static void addServicio(java.util.Date horaInicio,
-		long tipoServicio, double longitud, double latitud) {
-		getService().addServicio(horaInicio, tipoServicio, longitud, latitud);
+		long tipoServicio, double longitud, double latitud, long fichajeId) {
+		getService()
+			.addServicio(horaInicio, tipoServicio, longitud, latitud, fichajeId);
 	}
 
 	/**
@@ -182,6 +183,11 @@ public class ServicioLocalServiceUtil {
 		return getService().fetchServicio(idServicio);
 	}
 
+	public static es.vass.fichaje.model.Servicio findByFichajeId_Last(
+		long fichajeId) {
+		return getService().findByFichajeId_Last(fichajeId);
+	}
+
 	public static java.util.List<es.vass.fichaje.model.Servicio> findByIdFichaje(
 		long idFichaje) {
 		return getService().findByIdFichaje(idFichaje);
@@ -251,6 +257,12 @@ public class ServicioLocalServiceUtil {
 	*/
 	public static int getServiciosCount() {
 		return getService().getServiciosCount();
+	}
+
+	public static boolean updateEndService(long idServicio,
+		java.util.Date horaFin)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().updateEndService(idServicio, horaFin);
 	}
 
 	/**

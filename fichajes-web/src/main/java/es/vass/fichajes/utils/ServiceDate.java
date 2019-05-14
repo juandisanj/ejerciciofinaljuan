@@ -18,6 +18,21 @@ public class ServiceDate {
 	private static final Log _log = new LogFactoryUtil().getLog(ServiceDate.class);
 
 	
+	public static Date dateWithFormat(String format, Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		String dateString = sdf.format(date);
+		Date dateFormat = null;
+		try {
+			date = sdf.parse(dateString);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			_log.error("Method ServiceDate.stringToDate: Error en el parseado de fecha");
+		}
+		
+		return dateFormat;
+	}
+	
 	public static Date stringToDate(String format, String fecha) {
 		
 		_log.info("Method ServiceDate.stringToDate: Conversión de string a date");
@@ -35,7 +50,7 @@ public class ServiceDate {
 		return date;
 	}
 
-	public static Date initDay(String moment, Date date) {
+	public static Date toMomentOfDay(String moment, Date date) {
 		
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Date convertDate = null;

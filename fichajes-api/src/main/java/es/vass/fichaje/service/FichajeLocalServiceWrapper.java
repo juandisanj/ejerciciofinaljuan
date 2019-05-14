@@ -45,9 +45,8 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
-	public void addFichaje(long companyId, long userId,
-		java.util.Date horaEntrada) {
-		_fichajeLocalService.addFichaje(companyId, userId, horaEntrada);
+	public void addFichaje(long companyId, long userId, String userName) {
+		_fichajeLocalService.addFichaje(companyId, userId, userName);
 	}
 
 	/**
@@ -223,6 +222,17 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
+	public es.vass.fichaje.model.Fichaje findByUserId_Last(long userId) {
+		return _fichajeLocalService.findByUserId_Last(userId);
+	}
+
+	@Override
+	public java.util.List<es.vass.fichaje.model.Fichaje> findByUserIdDate(
+		long userId, java.util.Date initDay, java.util.Date endDay) {
+		return _fichajeLocalService.findByUserIdDate(userId, initDay, endDay);
+	}
+
+	@Override
 	public java.util.List<es.vass.fichaje.model.Fichaje> findByUsernameDate(
 		String userName, java.util.Date initDay, java.util.Date endDay) {
 		return _fichajeLocalService.findByUsernameDate(userName, initDay, endDay);
@@ -308,6 +318,12 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _fichajeLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public boolean updateEndFichaje(long fichajeId, java.util.Date horaSalida)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _fichajeLocalService.updateEndFichaje(fichajeId, horaSalida);
 	}
 
 	/**

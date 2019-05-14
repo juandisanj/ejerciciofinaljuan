@@ -71,7 +71,7 @@ public interface FichajeLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Fichaje addFichaje(Fichaje fichaje);
 
-	public void addFichaje(long companyId, long userId, Date horaEntrada);
+	public void addFichaje(long companyId, long userId, String userName);
 
 	/**
 	* Creates a new fichaje with the primary key. Does not add the fichaje to the database.
@@ -194,6 +194,10 @@ public interface FichajeLocalService extends BaseLocalService,
 
 	public List<Fichaje> findByUserId(long userId);
 
+	public Fichaje findByUserId_Last(long userId);
+
+	public List<Fichaje> findByUserIdDate(long userId, Date initDay, Date endDay);
+
 	public List<Fichaje> findByUsernameDate(String userName, Date initDay,
 		Date endDay);
 
@@ -257,6 +261,9 @@ public interface FichajeLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
+
+	public boolean updateEndFichaje(long fichajeId, Date horaSalida)
 		throws PortalException;
 
 	/**

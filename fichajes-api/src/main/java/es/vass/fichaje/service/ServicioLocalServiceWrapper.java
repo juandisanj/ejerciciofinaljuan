@@ -35,9 +35,9 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 
 	@Override
 	public void addServicio(java.util.Date horaInicio, long tipoServicio,
-		double longitud, double latitud) {
+		double longitud, double latitud, long fichajeId) {
 		_servicioLocalService.addServicio(horaInicio, tipoServicio, longitud,
-			latitud);
+			latitud, fichajeId);
 	}
 
 	/**
@@ -188,6 +188,11 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 	}
 
 	@Override
+	public es.vass.fichaje.model.Servicio findByFichajeId_Last(long fichajeId) {
+		return _servicioLocalService.findByFichajeId_Last(fichajeId);
+	}
+
+	@Override
 	public java.util.List<es.vass.fichaje.model.Servicio> findByIdFichaje(
 		long idFichaje) {
 		return _servicioLocalService.findByIdFichaje(idFichaje);
@@ -264,6 +269,12 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 	@Override
 	public int getServiciosCount() {
 		return _servicioLocalService.getServiciosCount();
+	}
+
+	@Override
+	public boolean updateEndService(long idServicio, java.util.Date horaFin)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _servicioLocalService.updateEndService(idServicio, horaFin);
 	}
 
 	/**
