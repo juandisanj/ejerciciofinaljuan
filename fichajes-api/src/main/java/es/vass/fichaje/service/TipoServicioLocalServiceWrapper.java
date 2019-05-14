@@ -185,6 +185,18 @@ public class TipoServicioLocalServiceWrapper implements TipoServicioLocalService
 	}
 
 	@Override
+	public java.util.List<es.vass.fichaje.model.TipoServicio> findAll() {
+		return _tipoServicioLocalService.findAll();
+	}
+
+	@Override
+	public es.vass.fichaje.model.TipoServicio findByIdTipoServicio(
+		long idTipoServicio)
+		throws es.vass.fichaje.exception.NoSuchTipoServicioException {
+		return _tipoServicioLocalService.findByIdTipoServicio(idTipoServicio);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _tipoServicioLocalService.getActionableDynamicQuery();
 	}

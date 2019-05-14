@@ -592,6 +592,160 @@ public class FichajeUtil {
 	}
 
 	/**
+	* Returns all the fichajes where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching fichajes
+	*/
+	public static List<Fichaje> findByUserId(long userId) {
+		return getPersistence().findByUserId(userId);
+	}
+
+	/**
+	* Returns a range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @return the range of matching fichajes
+	*/
+	public static List<Fichaje> findByUserId(long userId, int start, int end) {
+		return getPersistence().findByUserId(userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching fichajes
+	*/
+	public static List<Fichaje> findByUserId(long userId, int start, int end,
+		OrderByComparator<Fichaje> orderByComparator) {
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the fichajes where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link FichajeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of fichajes
+	* @param end the upper bound of the range of fichajes (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching fichajes
+	*/
+	public static List<Fichaje> findByUserId(long userId, int start, int end,
+		OrderByComparator<Fichaje> orderByComparator, boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public static Fichaje findByUserId_First(long userId,
+		OrderByComparator<Fichaje> orderByComparator)
+		throws es.vass.fichaje.exception.NoSuchFichajeException {
+		return getPersistence().findByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public static Fichaje fetchByUserId_First(long userId,
+		OrderByComparator<Fichaje> orderByComparator) {
+		return getPersistence().fetchByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje
+	* @throws NoSuchFichajeException if a matching fichaje could not be found
+	*/
+	public static Fichaje findByUserId_Last(long userId,
+		OrderByComparator<Fichaje> orderByComparator)
+		throws es.vass.fichaje.exception.NoSuchFichajeException {
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last fichaje in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fichaje, or <code>null</code> if a matching fichaje could not be found
+	*/
+	public static Fichaje fetchByUserId_Last(long userId,
+		OrderByComparator<Fichaje> orderByComparator) {
+		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the fichajes before and after the current fichaje in the ordered set where userId = &#63;.
+	*
+	* @param fichajeId the primary key of the current fichaje
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next fichaje
+	* @throws NoSuchFichajeException if a fichaje with the primary key could not be found
+	*/
+	public static Fichaje[] findByUserId_PrevAndNext(long fichajeId,
+		long userId, OrderByComparator<Fichaje> orderByComparator)
+		throws es.vass.fichaje.exception.NoSuchFichajeException {
+		return getPersistence()
+				   .findByUserId_PrevAndNext(fichajeId, userId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the fichajes where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	*/
+	public static void removeByUserId(long userId) {
+		getPersistence().removeByUserId(userId);
+	}
+
+	/**
+	* Returns the number of fichajes where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching fichajes
+	*/
+	public static int countByUserId(long userId) {
+		return getPersistence().countByUserId(userId);
+	}
+
+	/**
 	* Caches the fichaje in the entity cache if it is enabled.
 	*
 	* @param fichaje the fichaje

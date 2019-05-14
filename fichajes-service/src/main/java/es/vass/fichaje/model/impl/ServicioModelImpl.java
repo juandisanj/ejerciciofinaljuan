@@ -97,7 +97,11 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(es.vass.fichaje.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.es.vass.fichaje.model.Servicio"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(es.vass.fichaje.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.es.vass.fichaje.model.Servicio"),
+			true);
+	public static final long FICHAJEID_COLUMN_BITMASK = 1L;
+	public static final long IDSERVICIO_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(es.vass.fichaje.service.util.ServiceProps.get(
 				"lock.expiration.time.es.vass.fichaje.model.Servicio"));
 
@@ -286,7 +290,23 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 
 	@Override
 	public void setFichajeId(long fichajeId) {
+		_columnBitmask |= FICHAJEID_COLUMN_BITMASK;
+
+		if (!_setOriginalFichajeId) {
+			_setOriginalFichajeId = true;
+
+			_originalFichajeId = _fichajeId;
+		}
+
 		_fichajeId = fichajeId;
+	}
+
+	public long getOriginalFichajeId() {
+		return _originalFichajeId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -384,6 +404,13 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 
 	@Override
 	public void resetOriginalValues() {
+		ServicioModelImpl servicioModelImpl = this;
+
+		servicioModelImpl._originalFichajeId = servicioModelImpl._fichajeId;
+
+		servicioModelImpl._setOriginalFichajeId = false;
+
+		servicioModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -506,5 +533,8 @@ public class ServicioModelImpl extends BaseModelImpl<Servicio>
 	private double _latitud;
 	private long _idTipoServicio;
 	private long _fichajeId;
+	private long _originalFichajeId;
+	private boolean _setOriginalFichajeId;
+	private long _columnBitmask;
 	private Servicio _escapedModel;
 }

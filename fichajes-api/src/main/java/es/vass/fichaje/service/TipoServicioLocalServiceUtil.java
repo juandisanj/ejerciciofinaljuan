@@ -181,6 +181,16 @@ public class TipoServicioLocalServiceUtil {
 		return getService().fetchTipoServicio(idTipoServicio);
 	}
 
+	public static java.util.List<es.vass.fichaje.model.TipoServicio> findAll() {
+		return getService().findAll();
+	}
+
+	public static es.vass.fichaje.model.TipoServicio findByIdTipoServicio(
+		long idTipoServicio)
+		throws es.vass.fichaje.exception.NoSuchTipoServicioException {
+		return getService().findByIdTipoServicio(idTipoServicio);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}

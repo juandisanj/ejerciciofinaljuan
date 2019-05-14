@@ -14,7 +14,12 @@
 
 package es.vass.fichaje.service.impl;
 
+import java.util.List;
+
+import es.vass.fichaje.exception.NoSuchTipoServicioException;
+import es.vass.fichaje.model.TipoServicio;
 import es.vass.fichaje.service.base.TipoServicioLocalServiceBaseImpl;
+import es.vass.fichaje.service.persistence.TipoServicioUtil;
 
 /**
  * The implementation of the tipo servicio local service.
@@ -37,4 +42,14 @@ public class TipoServicioLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link es.vass.fichaje.service.TipoServicioLocalServiceUtil} to access the tipo servicio local service.
 	 */
+	
+	public List<TipoServicio> findAll(){
+		List<TipoServicio> listaTipoServicios = TipoServicioUtil.findAll();
+		return listaTipoServicios;
+	}
+	
+	public TipoServicio findByIdTipoServicio(long idTipoServicio) throws NoSuchTipoServicioException {
+		TipoServicio tipoServicio = TipoServicioUtil.findByPrimaryKey(idTipoServicio);
+		return tipoServicio;
+	}
 }

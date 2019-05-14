@@ -182,6 +182,17 @@ public class ServicioLocalServiceUtil {
 		return getService().fetchServicio(idServicio);
 	}
 
+	public static java.util.List<es.vass.fichaje.model.Servicio> findByIdFichaje(
+		long idFichaje) {
+		return getService().findByIdFichaje(idFichaje);
+	}
+
+	public static es.vass.fichaje.model.Servicio findByIdServicio(
+		long idServicio)
+		throws es.vass.fichaje.exception.NoSuchServicioException {
+		return getService().findByIdServicio(idServicio);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import es.vass.fichaje.exception.NoSuchTipoServicioException;
 import es.vass.fichaje.model.TipoServicio;
 
 import java.io.Serializable;
@@ -173,6 +174,11 @@ public interface TipoServicioLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public TipoServicio fetchTipoServicio(long idTipoServicio);
+
+	public List<TipoServicio> findAll();
+
+	public TipoServicio findByIdTipoServicio(long idTipoServicio)
+		throws NoSuchTipoServicioException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

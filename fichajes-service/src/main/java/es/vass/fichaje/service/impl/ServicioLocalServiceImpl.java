@@ -15,10 +15,14 @@
 package es.vass.fichaje.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
+import es.vass.fichaje.exception.NoSuchServicioException;
 import es.vass.fichaje.model.Servicio;
 import es.vass.fichaje.model.impl.ServicioImpl;
+import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.base.ServicioLocalServiceBaseImpl;
+import es.vass.fichaje.service.persistence.ServicioUtil;
 
 /**
  * The implementation of the servicio local service.
@@ -49,5 +53,15 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 		servicio.setLongitud(longitud);
 		
 		addServicio(servicio);
+	}
+	
+	public List<Servicio> findByIdFichaje(long idFichaje){
+		List<Servicio> listaFichajes = ServicioUtil.findByIdFichaje(idFichaje);
+		return listaFichajes;
+	}
+	
+	public Servicio findByIdServicio(long idServicio) throws NoSuchServicioException {
+		Servicio servicio = ServicioUtil.findByPrimaryKey(idServicio);
+		return servicio;
 	}
 }
