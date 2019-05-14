@@ -54,8 +54,12 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		
 		if(listaFichajes == null || listaFichajes.size() == 0) {
 			for(Role r : userRoles) {
-				if(userRoles.contains("Administrator") || userRoles.contains("RRHH")) {
+				if(r.getName().
+						
+						
+						contains("Administrator") || userRoles.contains("RRHH")) {
 					listaFichajes = FichajeLocalServiceUtil.findAll();
+					
 				}else {
 					listaFichajes = FichajeLocalServiceUtil.findByUserId(td.getUserId());
 				}
