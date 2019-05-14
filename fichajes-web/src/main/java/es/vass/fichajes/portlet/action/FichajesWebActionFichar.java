@@ -36,6 +36,12 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 		 *  - 
 		 */
 		
+		
+		/*
+		 * Recuperar la fecha actual y el usuario en sesión
+		 */
+		
+		
 		// Incluir un if/else, en función del cual se redirija al render adecuado
 //		actionResponse.setRenderParameter("mvcRenderCommandName", "/listFichajes");
 		
