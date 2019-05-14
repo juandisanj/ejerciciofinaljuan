@@ -1,5 +1,3 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ include file="/init.jsp"%>
 
 <%@ include file="/general/navbar.jsp"%>
@@ -20,21 +18,22 @@
 	<tbody>
 		<tr>
 			<th scope="row">${fichaje.userName}</th>
-			<td>
-				<fmt:formatDate type="both" value="${fichaje.horaEntrada}" pattern="dd-HH-yyyy HH:mm:ss" />
-			</td>
-			<td>
-				<fmt:formatDate type="both" value="${fichaje.horaSalida}" pattern="dd-HH-yyyy HH:mm:ss" />
-			</td>
+			<td>${fichaje.horaEntrada}</td>
+			<td>${fichaje.horaSalida}</td>
 			<td>${fichaje.horas}</td>
+
+			<c:forEach items="${listaServicios}" var="servicio">
+				<td class="card-text">${servicio.username}</td>
+				
+			</c:forEach>
 		</tr>
 	</tbody>
 </table>
 
-<br />
+<br/>
 
-<table class="table">
-	<thead class="thead-dark">
+<table class="table table-hover">
+	<thead>
 		<tr>
 			<th scope="col">Hora Inicio</th>
 			<th scope="col">Hora de Fin</th>
@@ -44,15 +43,14 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listaServicios}" var="servicio">
-			<tr>
-				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaInicio}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
-				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaFin}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+		<tr>
+			<c:forEach items="${listaServicios}" var="servicio">
+				<td class="card-text">${servicio.horaInicio}</td>
+				<td class="card-text">${servicio.horaFin}</td>
 				<td class="card-text">${servicio.longitud}</td>
 				<td class="card-text">${servicio.latitud}</td>
 				<td class="card-text">${servicio.idTipoServicio}</td>
-			</tr>
-		</c:forEach>
+			</c:forEach>
+		</tr>
 	</tbody>
 </table>
-

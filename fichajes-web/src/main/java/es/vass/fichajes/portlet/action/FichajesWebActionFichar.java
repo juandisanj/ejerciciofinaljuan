@@ -43,15 +43,20 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		
 		String estado = actionRequest.getParameter("process");
-
+		System.out.println("Estado recibido " + estado);
+		
+		// Si se pulsa el botón iniciar
 		if("start".equals(estado)) {
-			Date initDay = ServiceDate.toMomentOfDay("init", new Date());
-			Date endDay = ServiceDate.toMomentOfDay("end", new Date());
+			
+			// Recuperar la fecha actual para comprobar si el usuario ya ha fichado
+			Date now = new Date();
+			Date initDay = ServiceDate.toMomentOfDay("init", now);
+			Date endDay = ServiceDate.toMomentOfDay("end", now);
 			
 			System.out.println("Fechas enviadas al guardar: " + initDay + ", " + endDay);
 			long userId = td.getUserId();
 			
-			List<Fichaje> fichaje = null;
+			List<Fichaje> fichaje = null;	// Devolverá el fichaje de hoy, si existe
 			try {
 				fichaje = FichajeLocalServiceUtil.findByUserIdDate(userId, initDay, endDay);
 			}catch(Exception e) {
@@ -70,9 +75,8 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 					_log.error("Method FichajesWebActionFichar.processAction: Error al recuperar el fichaje del usuario recién creado");
 				}
 				
-				
 				// Crear el servicio
-				ServicioLocalServiceUtil.addServicio(initDay, idTipoServicio, 0.0, 0.0, lastFichaje.getFichajeId());
+				ServicioLocalServiceUtil.addServicio(now, idTipoServicio, 0.0, 0.0, lastFichaje.getFichajeId());
 				
 				actionRequest.setAttribute("activo", true);
 			}else {	// El usuario ya había fichado hoy
@@ -84,25 +88,36 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 					_log.info("Method FichajesWebActionFichar.processAction: Error al tratar de recuperar el último fichaje del usuario activo");
 				}
 				
-				
-				ServicioLocalServiceUtil.addServicio(initDay, idTipoServicio, 0.0, 0.0, lastFichaje.getFichajeId());
+				// Añade un nuevo servicio
+				ServicioLocalServiceUtil.addServicio(now, idTipoServicio, 0.0, 0.0, lastFichaje.getFichajeId());
 				
 				actionRequest.setAttribute("activo", true);
 				
 			}
-		}else {
+		}else {	// Si se pulsa el botón finalizar
 			// Finalizar el servicio activo
 			Fichaje lastFichaje = null;
 			try {
 				lastFichaje = FichajeLocalServiceUtil.findByUserId_Last(td.getUserId());
+				System.out.println("Id de usuario: " + td.getUserId());
 			}catch(Exception e) {
 				e.getMessage();
 				_log.error("Method FichajesWebActionFichar.processAction: Error al tratar de recuperar el último fichaje del usuario activo");
 			}
 			
-			Servicio servicio = ServicioLocalServiceUtil.findByFichajeId_Last(lastFichaje.getFichajeId());
+			actionRequest.setAttribute("activo", false);
+			
+			Servicio servicio = null;
+			try {
+				servicio = ServicioLocalServiceUtil.findByFichajeId_Last(lastFichaje.getFichajeId());
+			}catch(Exception e) {
+				e.getMessage();
+				_log.error("Method FichajesWebActionFichar.processAction: Error al tratar de recuperar el último fichaje");
+			}
+			
 			try {
 				ServicioLocalServiceUtil.updateEndService(servicio.getIdServicio(), new Date());
+				actionRequest.setAttribute("activo", false);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -24,11 +24,6 @@
 			<aui:button name="iniciaServicioButton" type="submit" value="Iniciar" />
 		</c:when>
 		<c:otherwise>
-			<aui:select name="tipoServicio">
-				<c:forEach items="${listaTipoServicios}" var="tipoServicio">
-					<aui:option value="${tipoServicio.idTipoServicio}" label="${tipoServicio.nombre}" />
-				</c:forEach>
-			</aui:select>
 			<aui:input name="process" type="hidden" value="end" />
 		
 			<aui:button name="paraServicioButton" type="submit" value="Parar" />

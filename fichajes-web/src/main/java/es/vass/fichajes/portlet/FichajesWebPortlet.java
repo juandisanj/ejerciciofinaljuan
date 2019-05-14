@@ -52,14 +52,14 @@ public class FichajesWebPortlet extends MVCPortlet {
 		
 		ThemeDisplay td = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		
-		
-		boolean activo = true;
+		boolean activo = false;
 		try {
 			activo = (boolean) renderRequest.getAttribute("activo");
 		}catch(Exception e) {
 			e.getMessage();
-			_log.error("Method FichajesWebPortlet.render: Renderizado de la página de Fichajes");
+			_log.error("Method FichajesWebPortlet.render: Error al recuperar el atributo activo");
 		}
+
 		
 		try {
 			
@@ -77,6 +77,11 @@ public class FichajesWebPortlet extends MVCPortlet {
 				_log.error("Method FichajesWebPortlet.render: Error al tratar de recuperar el fichaje del día actual");
 			}
 			
+			if(fichaje.size() == 0) {
+				activo = false;
+			}
+			
+			// Recuperar el id del Fichaje para comprobar su el último servicio está activo
 			long idFichaje = 0;
 			
 			System.out.println("Tamaño de la lista: " + fichaje.size());
@@ -87,13 +92,14 @@ public class FichajesWebPortlet extends MVCPortlet {
 			
 			Servicio servicio = ServicioLocalServiceUtil.findByFichajeId_Last(idFichaje);
 			if(servicio.getActivo() == true) {
-				activo = false;
+				activo = true;
 			}
 			
-		}catch(Exception e) {
+			System.out.println("Activo: " + servicio.getActivo());
+			
+		}catch(Exception e) {	// Si no tiene fichaje, activo continua en true
 			e.getMessage();
 			_log.error("Method FichajesWebPortlet.render: Error al tratar de recuperar el estado del Servicio actual");
-			activo = false;
 		}
 		
 		List<TipoServicio> listaTipoServicios = TipoServicioLocalServiceUtil.findAll();
