@@ -14,13 +14,14 @@
 
 package es.vass.fichaje.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 import java.util.Date;
 import java.util.List;
 
 import es.vass.fichaje.exception.NoSuchServicioException;
 import es.vass.fichaje.model.Servicio;
 import es.vass.fichaje.model.impl.ServicioImpl;
-import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.base.ServicioLocalServiceBaseImpl;
 import es.vass.fichaje.service.persistence.ServicioUtil;
 
@@ -45,12 +46,15 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 	 * Never reference this class directly. Always use {@link es.vass.fichaje.service.ServicioLocalServiceUtil} to access the servicio local service.
 	 */
 	
-	public void addServicio(Date horaInicio, long tipoServicio, double longitud, double latitud) {
+	public void addServicio(Date horaInicio, long tipoServicio, double longitud, double latitud, long fichajeId) {
 		Servicio servicio = new ServicioImpl();
 		servicio.setIdServicio(counterLocalService.increment());
+		servicio.setActivo(true);
 		servicio.setHoraInicio(horaInicio);
 		servicio.setLatitud(latitud);
 		servicio.setLongitud(longitud);
+		servicio.setIdTipoServicio(tipoServicio);
+		servicio.setFichajeId(fichajeId);
 		
 		addServicio(servicio);
 	}
@@ -63,5 +67,33 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 	public Servicio findByIdServicio(long idServicio) throws NoSuchServicioException {
 		Servicio servicio = ServicioUtil.findByPrimaryKey(idServicio);
 		return servicio;
+	}
+	
+	public Servicio findByFichajeId_Last(long fichajeId) {
+		Servicio servicio = null;
+		try {
+			servicio = ServicioUtil.findByIdFichaje_Last(fichajeId, null);
+		} catch (NoSuchServicioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return servicio;
+	}
+	
+	public boolean updateEndService(long idServicio, Date horaFin) throws PortalException {
+		
+		boolean done = false;
+		Servicio servicio = getServicio(idServicio);
+		servicio.setActivo(false);
+		servicio.setHoraFin(horaFin);
+	
+		try {
+			updateServicio(servicio);
+			done = true;
+		}catch(Exception e){
+			e.getMessage();
+		}
+		
+		return done;
 	}
 }
