@@ -11,13 +11,13 @@
 <aui:form class="form-inline" action="${filtroFechaUsuarioUrl}">
 	<div class="form-row align-items-center">
 		<div class="col-auto">
-			<aui:input name="initDate" type="date" label="Día" />
+			<aui:input name="initDate" type="date" label="Desde" />
 		</div>
 		<div class="col-auto">
 			<aui:input name="endDate" type="date" label="Hasta" />
 		</div>
 		<div class="col-auto">
-			<aui:select name="userName" label="Empleado">
+			<aui:select name="userId" label="Empleado">
 				<c:forEach var="user" items="${listUsers}">
 					<aui:option value="${user.userId}"
 						label="${user.firstName} ${user.lastName}" />

@@ -8,6 +8,12 @@
 	<portlet:param name="mvcRenderCommandName" value="/verJornada" />
 </portlet:renderURL>
 
+<h2>
+	<b><liferay-ui:message key="fichajesweb.caption"/></b>
+</h2>
+
+<br/>
+
 <ul class="nav nav-tabs">
 	<li class="nav-item">
     <a class="nav-link" href="${jspFichar}">Fichar</a>

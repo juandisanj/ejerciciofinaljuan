@@ -31,6 +31,26 @@
 
 <br />
 
+<portlet:actionURL name="filtroServicio" var="filtroServicioUrl" />
+
+<aui:form class="form-inline" action="${filtroServicioUrl}">
+	<div class="form-row align-items-center">
+		<div class="col-auto">
+			<aui:input name="initDate" type="date" label="Desde" />
+		</div>
+		<div class="col-auto">
+			<aui:input name="endDate" type="date" label="Hasta" />
+		</div>
+		
+		<aui:input name="fichajeId" type="hidden" value="${servicio.fichajeId}" />
+		<aui:button name="fitraServicioButton" type="submit" value="Buscar" />
+	</div>
+</aui:form>
+
+<c:if test="${errorFichaje == 'No Coincidencias'}">
+	<div class="alert alert-danger" role="alert">No se han encontrado resultados que se ajusten a la búsqueda</div>
+</c:if>
+
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
@@ -47,9 +67,9 @@
 		<c:forEach items="${listaServicios}" var="servicio">
 			<tr>
 				<td class="card-text"><fmt:formatDate type="both"
-						value="${servicio.horaInicio}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+						value="${servicio.horaInicio}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
 				<td class="card-text"><fmt:formatDate type="both"
-						value="${servicio.horaFin}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+						value="${servicio.horaFin}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
 				<td class="card-text">${servicio.duracion}</td>
 				<td class="card-text">${servicio.idTipoServicio}</td>
 				<td class="card-text">${servicio.longitud}</td>

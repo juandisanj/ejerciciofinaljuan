@@ -75,6 +75,7 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 			renderRequest.setAttribute("listaFichajes", listaFichajes);
 		}else {
 			renderRequest.setAttribute("error", "Existen datos");
+			renderRequest.setAttribute("listaFichajes", listaFichajes);
 		}
 		
 		return "/listFichajes.jsp";

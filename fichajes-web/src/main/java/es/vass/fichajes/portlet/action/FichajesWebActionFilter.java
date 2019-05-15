@@ -47,7 +47,7 @@ public class FichajesWebActionFilter implements MVCActionCommand {
 		Date initDate = ServiceDate.stringToDate("yyyy-MM-dd", initDateString);
 		String endDateString = actionRequest.getParameter("endDate");
 		Date endDate = ServiceDate.stringToDate("yyyy-MM-dd", endDateString);
-		String userName = actionRequest.getParameter("userName");
+		long userId = Long.parseLong(actionRequest.getParameter("userId"));
 		
 		List<Fichaje> listaFichajesFiltro = new ArrayList<>();
 		List<String> roles = new ArrayList<>();
@@ -55,7 +55,7 @@ public class FichajesWebActionFilter implements MVCActionCommand {
 		roles.add("RRHH");
 		
 		if(ServiceRole.checkRoles(td.getUser(), roles)) {
-			listaFichajesFiltro = FichajeLocalServiceUtil.findByUsernameDate(userName, initDate, endDate);
+			listaFichajesFiltro = FichajeLocalServiceUtil.findByUserIdDate(userId, initDate, endDate);
 		}else {
 			listaFichajesFiltro = FichajeLocalServiceUtil.findByUserIdDate(td.getUserId(), initDate, endDate);
 		}
