@@ -279,6 +279,15 @@ public class ServicioLocalServiceWrapper implements ServicioLocalService,
 			duracion);
 	}
 
+	@Override
+	public void updateInitEndTypeServicio(long idServicio,
+		java.util.Date horaInicio, java.util.Date horaFin, double duracion,
+		long tipoServicio)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_servicioLocalService.updateInitEndTypeServicio(idServicio, horaInicio,
+			horaFin, duracion, tipoServicio);
+	}
+
 	/**
 	* Updates the servicio in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

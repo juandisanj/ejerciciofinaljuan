@@ -17,7 +17,12 @@
 			<aui:input name="endDate" type="date" label="Hasta" />
 		</div>
 		<div class="col-auto">
-			<aui:input name="userName" type="text" label="Empleado" />
+			<aui:select name="userName" label="Empleado">
+				<c:forEach var="user" items="${listUsers}">
+					<aui:option value="${user.userId}"
+						label="${user.firstName} ${user.lastName}" />
+				</c:forEach>
+			</aui:select>
 		</div>
 		<aui:button name="fitraFichajeButton" type="submit" value="Buscar" />
 	</div>

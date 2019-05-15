@@ -237,6 +237,10 @@ public interface ServicioLocalService extends BaseLocalService,
 	public boolean updateEndService(long idServicio, Date horaFin,
 		double duracion) throws PortalException;
 
+	public void updateInitEndTypeServicio(long idServicio, Date horaInicio,
+		Date horaFin, double duracion, long tipoServicio)
+		throws PortalException;
+
 	/**
 	* Updates the servicio in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

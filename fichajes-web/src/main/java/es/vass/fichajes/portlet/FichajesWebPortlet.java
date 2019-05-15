@@ -1,7 +1,9 @@
 package es.vass.fichajes.portlet;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -26,6 +28,7 @@ import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.TipoServicioLocalServiceUtil;
 import es.vass.fichajes.constants.FichajesWebPortletKeys;
 import es.vass.fichajes.utils.ServiceDate;
+import es.vass.fichajes.utils.ServiceRole;
 
 /**
  * @author juand

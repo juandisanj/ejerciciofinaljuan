@@ -1,5 +1,6 @@
 package es.vass.fichajes.portlet.action;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -16,8 +17,10 @@ import javax.portlet.PortletException;
 import org.osgi.service.component.annotations.Component;
 
 import es.vass.fichaje.exception.NoSuchServicioException;
+import es.vass.fichaje.model.Fichaje;
 import es.vass.fichaje.model.Servicio;
 import es.vass.fichaje.model.TipoServicio;
+import es.vass.fichaje.service.FichajeLocalServiceUtil;
 import es.vass.fichaje.service.ServicioLocalServiceUtil;
 import es.vass.fichaje.service.TipoServicioLocalServiceUtil;
 import es.vass.fichajes.constants.FichajesWebPortletKeys;
@@ -42,9 +45,9 @@ public class FichajesWebActionUpdate implements MVCActionCommand  {
 		
 		
 		long idServicio = Long.parseLong(ParamUtil.getString(actionRequest, "idServicio"));
-		Servicio servicio = null;
+		Servicio currentServicio = null;
 		try {
-			servicio = ServicioLocalServiceUtil.findByIdServicio(idServicio);
+			currentServicio = ServicioLocalServiceUtil.findByIdServicio(idServicio);
 		} catch (NoSuchServicioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,7 +65,7 @@ public class FichajesWebActionUpdate implements MVCActionCommand  {
 			actionRequest.setAttribute("errorUpdate", "errorOrden");
 			actionResponse.setRenderParameter("jspPage", "/updateServicio.jsp");
 			actionRequest.setAttribute("listTiposServicio", listTiposServicio);
-		}else if((endDate.getDate() != servicio.getHoraFin().getDate()) || initDate.getDate() != servicio.getHoraInicio().getDate()){
+		}else if((endDate.getDate() != currentServicio.getHoraFin().getDate()) || initDate.getDate() != currentServicio.getHoraInicio().getDate()){
 			actionRequest.setAttribute("errorUpdate", "errorDia");
 			actionResponse.setRenderParameter("jspPage", "/updateServicio.jsp");
 			actionRequest.setAttribute("listTiposServicio", listTiposServicio);
@@ -70,6 +73,31 @@ public class FichajesWebActionUpdate implements MVCActionCommand  {
 //			actionRequest.setAttribute("errorUpdate", "");
 			// Actualizar servicio
 			// Actualizar fichaje
+			double duracion = ((double) (endDate.getTime() - initDate.getTime()))/3600000;
+			try {
+				ServicioLocalServiceUtil.updateInitEndTypeServicio(idServicio, initDate, endDate, duracion, idTipoServicio);
+			} catch (PortalException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			Fichaje currentFichaje = null;
+			try {
+				currentFichaje = FichajeLocalServiceUtil.findById(currentServicio.getFichajeId());
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			double horasFichaje = ServiceDate.calculaHorasFichaje(currentFichaje.getFichajeId());
+			try {
+				FichajeLocalServiceUtil.updateHorasFichaje(currentFichaje.getFichajeId(), horasFichaje);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			actionResponse.setRenderParameter("mvcRenderCommandName", "/updateServicio");
+			
 		}
 		
 		return true;

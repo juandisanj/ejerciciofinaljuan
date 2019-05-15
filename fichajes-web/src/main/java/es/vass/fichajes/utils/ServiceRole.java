@@ -1,10 +1,13 @@
 package es.vass.fichajes.utils;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +33,19 @@ public class ServiceRole {
 		return haveRole;
 	}
 	
-	public static List<User> getUsersPortlet(){
+	public static List<User> getUsersPortlet(ThemeDisplay td) throws PortalException{
 		List<User> listUsers = new ArrayList<>();
 		
 		List<User> listUserLiferay = UserLocalServiceUtil.getUsers(0, Integer.MAX_VALUE);
-		for(User user : listUserLiferay) {
-			
+		
+		for(User u : listUserLiferay) {
+			List<Group> listSiteGroups = u.getSiteGroups();
+			for(Group g : listSiteGroups) {
+				if("Escritorio Virtual".equals(g.getGroupKey())) {
+					listUsers.add(u);
+					break;
+				}
+			}
 		}
 		
 		return listUsers;

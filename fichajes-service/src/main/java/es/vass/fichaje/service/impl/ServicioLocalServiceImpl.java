@@ -97,4 +97,15 @@ public class ServicioLocalServiceImpl extends ServicioLocalServiceBaseImpl {
 		
 		return done;
 	}
+	
+	public void updateInitEndTypeServicio(long idServicio, Date horaInicio, Date horaFin, double duracion, long tipoServicio) throws PortalException {
+		
+		Servicio servicio = getServicio(idServicio);
+		servicio.setHoraInicio(horaInicio);
+		servicio.setHoraFin(horaFin);
+		servicio.setDuracion(duracion);
+		servicio.setIdTipoServicio(tipoServicio);
+		
+		updateServicio(servicio);
+	}
 }

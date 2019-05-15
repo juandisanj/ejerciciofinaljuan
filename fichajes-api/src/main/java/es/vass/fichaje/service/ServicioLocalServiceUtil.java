@@ -265,6 +265,15 @@ public class ServicioLocalServiceUtil {
 		return getService().updateEndService(idServicio, horaFin, duracion);
 	}
 
+	public static void updateInitEndTypeServicio(long idServicio,
+		java.util.Date horaInicio, java.util.Date horaFin, double duracion,
+		long tipoServicio)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.updateInitEndTypeServicio(idServicio, horaInicio, horaFin,
+			duracion, tipoServicio);
+	}
+
 	/**
 	* Updates the servicio in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

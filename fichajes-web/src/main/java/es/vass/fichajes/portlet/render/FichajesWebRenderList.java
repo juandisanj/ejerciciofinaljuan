@@ -1,7 +1,9 @@
 package es.vass.fichajes.portlet.render;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -37,7 +39,16 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		_log.info("Method FichajesWebRenderList.render: Renderizado del listado de fichajes");
 		
 		ThemeDisplay td = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+//		User user = td.getUser().getlas
 		
+		List<User> listUsers = new ArrayList<>();
+		try {
+			listUsers = ServiceRole.getUsersPortlet(td);
+		} catch (PortalException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		renderRequest.setAttribute("listUsers", listUsers);
 		
 		List<Fichaje> listaFichajes = new ArrayList<>();
 		try {
