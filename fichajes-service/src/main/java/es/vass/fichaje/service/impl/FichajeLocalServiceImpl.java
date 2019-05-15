@@ -127,4 +127,11 @@ public class FichajeLocalServiceImpl extends FichajeLocalServiceBaseImpl {
 		return done;
 	}
 	
+	public void updateHorasFichaje(long fichajeId, double horas) throws PortalException {
+		Fichaje fichaje = getFichaje(fichajeId);
+		fichaje.setHoras(horas);
+		
+		updateFichaje(fichaje);
+	}
+	
 }

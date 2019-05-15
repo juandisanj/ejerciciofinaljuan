@@ -341,6 +341,12 @@ public class FichajeLocalServiceWrapper implements FichajeLocalService,
 	}
 
 	@Override
+	public void updateHorasFichaje(long fichajeId, double horas)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_fichajeLocalService.updateHorasFichaje(fichajeId, horas);
+	}
+
+	@Override
 	public FichajeLocalService getWrappedService() {
 		return _fichajeLocalService;
 	}

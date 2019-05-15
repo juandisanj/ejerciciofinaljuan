@@ -1,4 +1,4 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="/init.jsp"%>
 
@@ -20,12 +20,10 @@
 	<tbody>
 		<tr>
 			<th scope="row">${fichaje.userName}</th>
-			<td>
-				<fmt:formatDate type="both" value="${fichaje.horaEntrada}" pattern="dd-HH-yyyy HH:mm:ss" />
-			</td>
-			<td>
-				<fmt:formatDate type="both" value="${fichaje.horaSalida}" pattern="dd-HH-yyyy HH:mm:ss" />
-			</td>
+			<td><fmt:formatDate type="both" value="${fichaje.horaEntrada}"
+					pattern="dd-HH-yyyy HH:mm:ss" /></td>
+			<td><fmt:formatDate type="both" value="${fichaje.horaSalida}"
+					pattern="dd-HH-yyyy HH:mm:ss" /></td>
 			<td>${fichaje.horas}</td>
 		</tr>
 	</tbody>
@@ -42,17 +40,25 @@
 			<th scope="col">Tipo Servicio</th>
 			<th scope="col">Longitud</th>
 			<th scope="col">Latitud</th>
+			<th scope="col">Modificar</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${listaServicios}" var="servicio">
 			<tr>
-				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaInicio}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
-				<td class="card-text"><fmt:formatDate type="both" value="${servicio.horaFin}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+				<td class="card-text"><fmt:formatDate type="both"
+						value="${servicio.horaInicio}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
+				<td class="card-text"><fmt:formatDate type="both"
+						value="${servicio.horaFin}" pattern="dd-HH-yyyy HH:mm:ss" /></td>
 				<td class="card-text">${servicio.duracion}</td>
 				<td class="card-text">${servicio.idTipoServicio}</td>
 				<td class="card-text">${servicio.longitud}</td>
 				<td class="card-text">${servicio.latitud}</td>
+				<portlet:renderURL var="jspUpdateFichaje">
+					<portlet:param name="mvcRenderCommandName" value="/updateServicio" />
+					<portlet:param name="idServicio" value="${servicio.idServicio}" />
+				</portlet:renderURL>
+				<td class="card-text"><a href="${jspUpdateFichaje}" role="button">Modificar</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

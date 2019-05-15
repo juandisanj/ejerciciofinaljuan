@@ -105,7 +105,7 @@ public class ServiceDate {
 			suma += tiempoServicio;
 		}
 		
-		horasTotales = suma/3600000;
+		horasTotales = ((double) suma)/3600000;
 		
 		return horasTotales;
 	}

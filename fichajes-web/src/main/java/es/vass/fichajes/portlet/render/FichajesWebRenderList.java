@@ -3,6 +3,7 @@ package es.vass.fichajes.portlet.render;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -36,7 +37,7 @@ public class FichajesWebRenderList implements MVCRenderCommand {
 		_log.info("Method FichajesWebRenderList.render: Renderizado del listado de fichajes");
 		
 		ThemeDisplay td = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		String userName = td.getUser().getFirstName();
+		
 		
 		List<Fichaje> listaFichajes = new ArrayList<>();
 		try {

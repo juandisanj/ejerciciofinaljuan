@@ -274,4 +274,7 @@ public interface FichajeLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public Fichaje updateFichaje(Fichaje fichaje);
+
+	public void updateHorasFichaje(long fichajeId, double horas)
+		throws PortalException;
 }

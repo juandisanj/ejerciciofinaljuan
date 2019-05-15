@@ -125,8 +125,10 @@ public class FichajesWebActionFichar implements MVCActionCommand {
 			
 			try {
 				Date now = new Date();
-				double duracion = (now.getTime() - servicio.getHoraInicio().getTime())/3600000;
+				double duracion = ((double) (now.getTime() - servicio.getHoraInicio().getTime()))/3600000;
 				ServicioLocalServiceUtil.updateEndService(servicio.getIdServicio(), new Date(), duracion);
+				double horasFichaje = ServiceDate.calculaHorasFichaje(servicio.getFichajeId());
+				FichajeLocalServiceUtil.updateHorasFichaje(servicio.getFichajeId(), horasFichaje);
 				actionRequest.setAttribute("activo", false);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block

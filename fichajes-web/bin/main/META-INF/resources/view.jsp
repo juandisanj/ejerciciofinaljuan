@@ -20,6 +20,8 @@
 				</c:forEach>
 			</aui:select>
 			<aui:input name="process" type="hidden" value="start" />
+			<aui:input name="latitude" type="hidden" id="latitude" />
+			<aui:input name="longitude" type="text" id="longitude" />
 		
 			<aui:button name="iniciaServicioButton" type="submit" value="Iniciar" />
 		</c:when>
@@ -31,11 +33,22 @@
 	</c:choose>
 </aui:form>
 
-<script type="text/javascript">
-console.log("script de view");
+<aui:script>
+
+// AUI().use({
+	
+// });
+
 function showPosition(position) {
     console.log("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude)
+    var latitude = position.coords.latitude.toString(2);
+    var longitude = position.coords.longitude.toString(2);
+    document.getElementById("latitude").innerHTML = latitude;
+    document.getElementById("longitude").innerHTML = longitude;
 }
+
+
+
 function showError(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -57,4 +70,4 @@ if (navigator.geolocation) {
 } else {
     console.log("Geolocation API doesn't supported.")
 }
-</script>
+</aui:script>

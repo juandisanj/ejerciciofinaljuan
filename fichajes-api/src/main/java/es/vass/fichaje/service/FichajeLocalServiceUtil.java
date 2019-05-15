@@ -318,6 +318,11 @@ public class FichajeLocalServiceUtil {
 		return getService().updateFichaje(fichaje);
 	}
 
+	public static void updateHorasFichaje(long fichajeId, double horas)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().updateHorasFichaje(fichajeId, horas);
+	}
+
 	public static FichajeLocalService getService() {
 		return _serviceTracker.getService();
 	}

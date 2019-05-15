@@ -49,12 +49,8 @@
 			<portlet:param name="fichajeId" value="${currentFichaje.fichajeId}" />
 		</liferay-portlet:renderURL>
 
-		<portlet:actionURL name="updateUsuario" var="updateUsuarioUrl" />
-
 		<liferay-ui:search-container-column-text name="Detail"
 			href="${rowURL}" value="Ver detalle" />
-		<liferay-ui:search-container-column-text name="Update"
-			href="${updateUsuarioUrl}" value="Modificar" />
 
 		<!-- Borrador para incluir un icono con las opciones de Detalle - Modificar - Eliminar -->
 
